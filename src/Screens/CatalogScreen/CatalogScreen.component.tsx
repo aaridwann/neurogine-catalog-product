@@ -1,11 +1,43 @@
 import React from 'react';
 
-import { View } from 'react-native';
+import { ActivityIndicator, FlatList, View, type FlatListProps  } from 'react-native';
 
-import ButtonComponent, { Constants as ButtonConstants } from '@Neurogine/ui-kit-button';
-import GeneralText, { Constants as TextConstants } from '@Neurogine/ui-kit-general-text';
+import { noop } from 'lodash';
 
-import { CatalogProductScreenComponentProps } from './CatalogScreen.types';
+import styles from './CatalogScreen.styles';
+import CardComponent from '../../Components/Card/Card.component';
+
+import type { CatalogProductScreenComponentProps } from './CatalogScreen.types';
+import type { CatalogItem } from '../../Service/CatalogProduct.service.types';
+import type { VoidFunction } from '../../Types';
+
+/**
+ * Helper function to get FlatList products props
+ * @param {CatalogItem[]} products - Array of catalog products
+ * @param {boolean} hasNextPage - Whether there is a next page
+ * @param {VoidFunction} fetchNextPage - Callback function to fetch the next page
+ * @returns {FlatListProps<CatalogItem>} FlatList props for products
+ */
+const _getFlatListProductsProps =(
+  products: CatalogItem[],
+  hasNextPage: boolean,
+  fetchNextPage: VoidFunction,
+): FlatListProps<CatalogItem> => ({
+  data: products,
+  numColumns: 2,
+  keyExtractor: (item: CatalogItem) => item.id.toString(),
+  onEndReached: () => hasNextPage && fetchNextPage(),
+  onEndReachedThreshold: 0.7,
+  columnWrapperStyle: styles.columnWrapper,
+  contentContainerStyle: styles.listContainer,
+  renderItem: ({ item }: { item: CatalogItem }) =>
+    <CardComponent
+      data={item}
+      onFavoritePress={noop}
+      onAddToCartPress={noop}
+      onCardPress={noop}
+    />,
+});
 
 /**
  * CatalogProductScreenComponent is a component for the CatalogProductScreen.
@@ -14,30 +46,13 @@ import { CatalogProductScreenComponentProps } from './CatalogScreen.types';
  * @param {Object} props.onGoBack - The callback function to go back.
  * @returns {React.Component} The CatalogProductScreenComponent.
  */
-const CatalogProductScreenComponent: React.FC<CatalogProductScreenComponentProps> = ({ 
-  title, onGoBack, 
-}) => {
+const CatalogProductScreenComponent: React.FC<CatalogProductScreenComponentProps> =
+({ products, fetchNextPage, hasNextPage, isLoading }) => {
   return (
-    <View>
-      <View style={{ paddingHorizontal: 20, paddingTop: 20, alignItems: 'center' }}>
-        <GeneralText
-          color={TextConstants.TEXT_COLOR.TERTIARY}
-          variant={TextConstants.VARIANT.HEADLINE3}
-          numberOfLines={1}
-        >
-          {title}
-        </GeneralText>
-
-      </View>
-      <View style={{ paddingHorizontal: 20 }}>
-
-        <ButtonComponent
-          variant={ButtonConstants.VARIANT.DANGER}
-          size={ButtonConstants.SIZE.MEDIUM}
-          onPress={onGoBack} title='Go Back'
-          style={{ width: '50%' }}
-        />
-      </View>
+    <View style={styles.container}>
+      {isLoading ? <ActivityIndicator/> :
+        <FlatList {..._getFlatListProductsProps(products, hasNextPage, fetchNextPage)}/>
+      }
     </View>
   );
 };

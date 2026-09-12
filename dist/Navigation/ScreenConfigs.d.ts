@@ -1,5 +1,5 @@
 import { CatalogRoutes } from '../Shared';
-import { ScreenConfig } from './ScreemConfigs.types';
+import type { ScreenConfig } from './ScreemConfigs.types';
 /**
  * Configuration for catalog screens
  * @returns {ScreenConfig<"CatalogProductScreen">} Array of ScreenConfig objects

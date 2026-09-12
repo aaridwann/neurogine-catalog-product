@@ -1,10 +1,13 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
 
-import { ParamListBase } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import get from 'lodash/get';
 
 import CatalogProductScreenComponent from './CatalogScreen.component';
+import ProductsMock from '../../Fixture/Products.json';
+import { useCatalogProductInfinite } from '../../Service/CatalogProduct.service';
+
+import type { ParamListBase } from '@react-navigation/native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 
 /**
  * DetailScreenContainer is a container component for the DetailScreen.
@@ -14,7 +17,14 @@ import CatalogProductScreenComponent from './CatalogScreen.component';
  * @param {Object} props.navigation - The navigation object.
  * @returns {React.Component} The DetailScreenComponent.
  */
-const CatalogProductScreen: ComponentType<NativeStackScreenProps<ParamListBase, "CatalogProductScreen">> = ({ route, navigation }) => {
+const CatalogProductScreen: React.ComponentType<NativeStackScreenProps<ParamListBase, 'CatalogProductScreen'>> = ({ route, navigation }) => {
+  const [showBottomSheet, setShowBottomSheet] = React.useState(false);
+
+  const { data, isLoading, fetchNextPage, hasNextPage, error } = useCatalogProductInfinite({
+    limit: 10,
+    search: '',
+    category: '',
+  });
 
   const title = get(route, 'params.title') as string | undefined;
 
@@ -22,11 +32,18 @@ const CatalogProductScreen: ComponentType<NativeStackScreenProps<ParamListBase, 
     navigation.goBack();
   };
 
+  const products = data?.pages.flatMap((page) => page.products) ?? [];
+
   return (
     <CatalogProductScreenComponent
       route={route}
       title={title}
       onGoBack={handleGoBack}
+      products={products}
+      isLoading={isLoading}
+      fetchNextPage={fetchNextPage}
+      hasNextPage={hasNextPage}
+      error={error}
     />
   );
 };

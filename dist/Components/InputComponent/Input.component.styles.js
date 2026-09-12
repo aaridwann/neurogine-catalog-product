@@ -1,0 +1,105 @@
+import { StyleSheet } from 'react-native';
+const styles = StyleSheet.create({
+    actionButton: {
+        padding: 2,
+    },
+    actionContainer: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        gap: 6,
+        paddingLeft: 8,
+    },
+    container: {
+        alignItems: 'center',
+        backgroundColor: '#FAFAFA',
+        borderRadius: 12,
+        borderWidth: 0.2,
+        flexDirection: 'row',
+        height: 52,
+        paddingHorizontal: 14,
+    },
+    disabledContainer: {
+        backgroundColor: '#F2F2F7',
+        borderColor: '#E5E5EA',
+    },
+    disabledInput: {
+        color: '#AEAEB2',
+    },
+    errorText: {
+        color: '#FF3B30',
+        fontSize: 11,
+        fontWeight: '500',
+        marginTop: 4,
+        paddingLeft: 4,
+    },
+    input: {
+        color: '#1C1C1E',
+        fontSize: 14,
+        fontWeight: '500',
+        height: '100%',
+        paddingBottom: 4,
+        paddingTop: 18,
+    },
+    inputFieldWrapper: {
+        flex: 1,
+        height: '100%',
+        justifyContent: 'center',
+        position: 'relative',
+    },
+    label: {
+        fontWeight: '500',
+        position: 'absolute',
+        zIndex: 1,
+    },
+    leadingIcon: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 10,
+    },
+    suggestionDropdown: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 12,
+        borderWidth: 0.2,
+        elevation: 6,
+        left: 0,
+        marginTop: 6,
+        overflow: 'hidden',
+        position: 'absolute',
+        right: 0,
+        shadowColor: '#000000',
+        shadowOffset: { height: 4, width: 0 },
+        shadowOpacity: 0.1,
+        shadowRadius: 12,
+        top: 52,
+        zIndex: 100,
+    },
+    suggestionItem: {
+        alignItems: 'center',
+        borderBottomColor: '#F2F2F7',
+        borderBottomWidth: 1,
+        flexDirection: 'row',
+        gap: 10,
+        paddingHorizontal: 14,
+        paddingVertical: 12,
+    },
+    suggestionLabel: {
+        color: '#1C1C1E',
+        fontSize: 13,
+        fontWeight: '500',
+    },
+    suggestionSubtitle: {
+        color: '#8E8E93',
+        fontSize: 11,
+        marginTop: 1,
+    },
+    suggestionTextContainer: {
+        flex: 1,
+    },
+    wrapper: {
+        marginBottom: 4,
+        position: 'relative',
+        width: '100%',
+        zIndex: 10,
+    },
+});
+export default styles;

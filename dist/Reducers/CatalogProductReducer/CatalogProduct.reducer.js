@@ -1,4 +1,4 @@
-import { CatalogActionConstants } from "../../Shared";
+import { CatalogActionConstants } from '../../Shared';
 /**
  * Initial state
  */

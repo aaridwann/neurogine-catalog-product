@@ -1,10 +1,15 @@
 import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
+    columnWrapper: {
+        columnGap: 4,
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 16,
+    },
+    listContainer: {
+        gap: 4,
     },
     text: {
         fontSize: 18,

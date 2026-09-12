@@ -1,1 +1,1 @@
-export { default } from './CatalogScreen.container'
+export { default } from './CatalogScreen.container';

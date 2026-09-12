@@ -1,13 +1,14 @@
-import { CatalogProductAction, CatalogProductState } from "./CatalogProduct.reducer.types";
-import { CatalogActionConstants } from "../../Shared";
+import { CatalogActionConstants } from '../../Shared';
+
+import type { CatalogProductAction, CatalogProductState } from './CatalogProduct.reducer.types';
 
 /**
  * Initial state
  */
 const initialState: CatalogProductState = {
-    data: [],
-    loading: false,
-    error: null,
+  data: [],
+  loading: false,
+  error: null,
 };
 
 /**
@@ -17,33 +18,33 @@ const initialState: CatalogProductState = {
  * @returns {CatalogProductState} - Updated state
  */
 export const catalogProductReducer = (
-    state = initialState, action: CatalogProductAction,
+  state = initialState, action: CatalogProductAction,
 ): CatalogProductState => {
-    switch (action.type) {
-        case CatalogActionConstants.SET_DATA_CATALOG_PRODUCT:
-            return {
-                ...state,
-                data: action.payload,
-            };
-        case CatalogActionConstants.GET_CATALOG_PRODUCT_REQUEST:
-            return {
-                ...state,
-                loading: true,
-                error: null,
-            };
-        case CatalogActionConstants.GET_CATALOG_PRODUCT_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                data: action.payload,
-            };
-        case CatalogActionConstants.GET_CATALOG_PRODUCT_FAILED:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload,
-            };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case CatalogActionConstants.SET_DATA_CATALOG_PRODUCT:
+      return {
+        ...state,
+        data: action.payload,
+      };
+    case CatalogActionConstants.GET_CATALOG_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case CatalogActionConstants.GET_CATALOG_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+    case CatalogActionConstants.GET_CATALOG_PRODUCT_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
 };

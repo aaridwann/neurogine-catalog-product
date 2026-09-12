@@ -1,5 +1,5 @@
 import React from 'react';
-import { CatalogProductScreenComponentProps } from './CatalogScreen.types';
+import type { CatalogProductScreenComponentProps } from './CatalogScreen.types';
 /**
  * CatalogProductScreenComponent is a component for the CatalogProductScreen.
  * It is responsible for displaying the data from the Redux store.

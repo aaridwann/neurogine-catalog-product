@@ -49,13 +49,18 @@
     "vitest-react-native": "^0.1.5"
   },
   "dependencies": {
+    "@Neurogine/core-network": "https://github.com/aaridwann/neurogine-core-network.git#master",
     "@Neurogine/ui-kit-button": "https://github.com/aaridwann/neurogine-ui-kit-button.git#d3c497658ff1bcf23298ce04d69e783c0cf4eb6b",
     "@Neurogine/ui-kit-general-text": "https://github.com/aaridwann/neurogine-ui-kit-general-text.git#d91430949c388958a685562a8d64c37d469dd542",
+    "@react-native-masked-view/masked-view": "^0.3.2",
+    "@react-native-vector-icons/common": "^13.0.3",
+    "@react-native-vector-icons/ionicons": "^13.1.4",
     "@react-navigation/native": "^6.0.0",
     "@react-navigation/native-stack": "^6.0.0",
     "@reduxjs/toolkit": "^2.12.0",
     "fast-memoize": "^2.5.2",
     "lodash": "^4.18.1",
+    "react-native-safe-area-context": "^5.9.1",
     "react-redux": "^9.3.0"
   },
   "resolutions": {

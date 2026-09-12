@@ -1,6 +1,7 @@
 import React from 'react';
 import get from 'lodash/get';
 import CatalogProductScreenComponent from './CatalogScreen.component';
+import { useCatalogProductInfinite } from '../../Service/CatalogProduct.service';
 /**
  * DetailScreenContainer is a container component for the DetailScreen.
  * It is also responsible for handling the navigation events.
@@ -10,11 +11,18 @@ import CatalogProductScreenComponent from './CatalogScreen.component';
  * @returns {React.Component} The DetailScreenComponent.
  */
 const CatalogProductScreen = ({ route, navigation }) => {
+    const [showBottomSheet, setShowBottomSheet] = React.useState(false);
+    const { data, isLoading, fetchNextPage, hasNextPage, error } = useCatalogProductInfinite({
+        limit: 10,
+        search: '',
+        category: '',
+    });
     const title = get(route, 'params.title');
     const handleGoBack = () => {
         navigation.goBack();
     };
-    return (<CatalogProductScreenComponent route={route} title={title} onGoBack={handleGoBack}/>);
+    const products = data?.pages.flatMap((page) => page.products) ?? [];
+    return (<CatalogProductScreenComponent route={route} title={title} onGoBack={handleGoBack} products={products} isLoading={isLoading} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} error={error}/>);
 };
 CatalogProductScreen.displayName = 'CatalogProductScreen';
 export default React.memo(CatalogProductScreen);

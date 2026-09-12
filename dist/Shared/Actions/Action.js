@@ -1,20 +1,20 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction } from '@reduxjs/toolkit';
 /**
  * Type for action to set data detail product
  */
-const SET_DATA_CATALOG_PRODUCT = "SET_DATA_CATALOG_PRODUCT";
+const SET_DATA_CATALOG_PRODUCT = 'SET_DATA_CATALOG_PRODUCT';
 /**
  * Type for action to get data detail product request
  */
-const GET_CATALOG_PRODUCT_REQUEST = "GET_CATALOG_PRODUCT_REQUEST";
+const GET_CATALOG_PRODUCT_REQUEST = 'GET_CATALOG_PRODUCT_REQUEST';
 /**
  * Type for action to get data detail product failed
  */
-const GET_CATALOG_PRODUCT_FAILED = "GET_CATALOG_PRODUCT_FAILED";
+const GET_CATALOG_PRODUCT_FAILED = 'GET_CATALOG_PRODUCT_FAILED';
 /**
  * Type for action to get data detail product success
  */
-const GET_CATALOG_PRODUCT_SUCCESS = "GET_CATALOG_PRODUCT_SUCCESS";
+const GET_CATALOG_PRODUCT_SUCCESS = 'GET_CATALOG_PRODUCT_SUCCESS';
 /**
  * Constants for action types
  */

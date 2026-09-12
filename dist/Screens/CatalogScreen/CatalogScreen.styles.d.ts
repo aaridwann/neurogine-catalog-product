@@ -1,9 +1,14 @@
 declare const _default: Readonly<{
+    columnWrapper: {
+        columnGap: number;
+    };
     container: {
         flex: number;
         justifyContent: "center";
         alignItems: "center";
-        padding: number;
+    };
+    listContainer: {
+        gap: number;
     };
     text: {
         fontSize: number;

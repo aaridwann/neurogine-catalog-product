@@ -1,30 +1,30 @@
-import { describe, it, expect } from "vitest";
-import { catalogProductReducer } from "./CatalogProduct.reducer";
+import { describe, it, expect } from 'vitest';
+import { catalogProductReducer } from './CatalogProduct.reducer';
 // eslint-disable-next-line max-lines-per-function
-describe("Reducer: DetailProduct", () => {
-    it("should return the initial state", () => {
+describe('Reducer: DetailProduct', () => {
+    it('should return the initial state', () => {
         const initialState = {
             data: [],
             loading: false,
             error: null,
         };
-        expect(catalogProductReducer(initialState, { type: "SET_DATA_DETAIL_PRODUCT", payload: [] })).toEqual(initialState);
+        expect(catalogProductReducer(initialState, { type: 'SET_DATA_DETAIL_PRODUCT', payload: [] })).toEqual(initialState);
     });
-    it("should handle SET_DATA_DETAIL_PRODUCT", () => {
+    it('should handle SET_DATA_DETAIL_PRODUCT', () => {
         const action = {
-            type: "SET_DATA_DETAIL_PRODUCT",
-            payload: [{ id: 1, name: "Product 1" }],
+            type: 'SET_DATA_DETAIL_PRODUCT',
+            payload: [{ id: 1, name: 'Product 1' }],
         };
         const expectedState = {
-            data: [{ id: 1, name: "Product 1" }],
+            data: [{ id: 1, name: 'Product 1' }],
             loading: false,
             error: null,
         };
         expect(catalogProductReducer(undefined, action)).toEqual(expectedState);
     });
-    it("should handle GET_DETAIL_PRODUCT_REQUEST", () => {
+    it('should handle GET_DETAIL_PRODUCT_REQUEST', () => {
         const action = {
-            type: "GET_DETAIL_PRODUCT_REQUEST",
+            type: 'GET_DETAIL_PRODUCT_REQUEST',
             payload: [],
         };
         const expectedState = {
@@ -34,27 +34,27 @@ describe("Reducer: DetailProduct", () => {
         };
         expect(catalogProductReducer(undefined, action)).toEqual(expectedState);
     });
-    it("should handle GET_DETAIL_PRODUCT_SUCCESS", () => {
+    it('should handle GET_DETAIL_PRODUCT_SUCCESS', () => {
         const action = {
-            type: "GET_DETAIL_PRODUCT_SUCCESS",
-            payload: [{ id: 1, name: "Product 1" }],
+            type: 'GET_DETAIL_PRODUCT_SUCCESS',
+            payload: [{ id: 1, name: 'Product 1' }],
         };
         const expectedState = {
-            data: [{ id: 1, name: "Product 1" }],
+            data: [{ id: 1, name: 'Product 1' }],
             loading: false,
             error: null,
         };
         expect(catalogProductReducer(undefined, action)).toEqual(expectedState);
     });
-    it("should handle GET_DETAIL_PRODUCT_FAILED", () => {
+    it('should handle GET_DETAIL_PRODUCT_FAILED', () => {
         const action = {
-            type: "GET_DETAIL_PRODUCT_FAILED",
+            type: 'GET_DETAIL_PRODUCT_FAILED',
             payload: [],
         };
         const expectedState = {
             data: [],
             loading: false,
-            error: "Error",
+            error: 'Error',
         };
         expect(catalogProductReducer(undefined, action)).toEqual(expectedState);
     });
