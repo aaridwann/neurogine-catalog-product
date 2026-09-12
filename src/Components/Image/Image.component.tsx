@@ -1,19 +1,69 @@
-/* eslint-disable no-duplicate-imports */
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Animated, Image, StyleSheet, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import {
+  Animated,
+  Image,
+  StyleSheet,
+  View,
+  type ImageStyle,
+} from 'react-native';
 
-interface ImageWithSkeletonProps {
-  sourceUrl: string;
-  style: StyleProp<ViewStyle>;
-}
+import styles from './Image.component.styles';
 
-const ImageWithSkeleton = (
-  { sourceUrl, style }: ImageWithSkeletonProps,
-): React.ReactElement => {
+import type { ImageWithSkeletonProps } from './Image.component.types';
+import type { VoidFunction } from '../../Types';
+
+/**
+ * Render loading image component
+ * @param {boolean} isLoading - Boolean to check if image is loading
+ * @param {Animated.AnimatedInterpolation<number>} opacityAnim - Animated value for opacity
+ * @returns {React.ReactElement | null} React.ReactElement | null
+ */
+const _renderLoadingImage = (
+  isLoading: boolean,
+  opacityAnim: Animated.AnimatedInterpolation<number>,
+): React.ReactElement | null => {
+  if (!isLoading) return null;
+
+  return (
+    <Animated.View
+      style={[
+        StyleSheet.absoluteFill,
+        styles.skeleton,
+        { opacity: opacityAnim },
+      ]}
+    />
+  );
+};
+
+/**
+ * Render image component
+ * @param {string} sourceUrl - URL of the image
+ * @param {ImageStyle} style - Style for the image
+ * @param {VoidFunction} onLoadEnd - Callback function to be called when image has finished loading
+ * @returns {React.ReactElement} React.ReactElement
+ */
+const _renderImage = (
+  sourceUrl: string,
+  style: ImageStyle,
+  onLoadEnd: VoidFunction,
+): React.ReactElement => (
+  <Image
+    source={{ uri: sourceUrl }}
+    style={style}
+    onLoadEnd={onLoadEnd}
+  />
+);
+
+/**
+ * Render image with skeleton component
+ * @param {string} sourceUrl - URL of the image
+ * @param {ImageStyle} style - Style for the image
+ * @returns {React.ReactElement} React.ReactElement
+ */
+const ImageWithSkeleton = ({ sourceUrl, style }: ImageWithSkeletonProps): React.ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const opacityAnim = useRef(new Animated.Value(0.3)).current;
+  const opacityAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     let animation: Animated.CompositeAnimation | null = null;
@@ -46,40 +96,14 @@ const ImageWithSkeleton = (
 
   return (
     <View style={[styles.container, style]}>
-      {isLoading && (
-        <Animated.View
-          style={[
-            StyleSheet.absoluteFillObject,
-            styles.skeleton,
-            { opacity: opacityAnim },
-          ]}
-        />
+      {_renderLoadingImage(isLoading, opacityAnim)}
+      {_renderImage(
+        sourceUrl,
+        styles.image,
+        () => setIsLoading(false),
       )}
-
-      <Image
-        source={{ uri: sourceUrl }}
-        style={styles.image}
-        onLoadEnd={() => {
-          setIsLoading(false);
-        }}
-      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  image: {
-    height: '100%',
-    width: '100%',
-  },
-  skeleton: {
-    backgroundColor: '#E0E0E0',
-    zIndex: 1,
-  },
-});
-
-export default ImageWithSkeleton;
+export default React.memo(ImageWithSkeleton);

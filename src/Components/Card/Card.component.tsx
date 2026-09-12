@@ -2,18 +2,19 @@ import React from 'react';
 
 import { TouchableOpacity, View } from 'react-native';
 
-import MaskedView from '@react-native-masked-view/masked-view';
+import MaskedViewComponent, { type MaskedViewProps } from '@react-native-masked-view/masked-view';
 import { Ionicons } from '@react-native-vector-icons/ionicons/static';
 
 import GeneralText from '@Neurogine/ui-kit-general-text';
 import { VARIANT } from '@Neurogine/ui-kit-general-text/dist/Constants';
 
-import style from './Card.component.styles';
+import style, { getStarWidthStyle } from './Card.component.styles';
 import ImageWithSkeleton from '../Image';
 
 import type { CardComponentProps } from './Card.component.types';
 import type { CatalogItem } from '../../Service/CatalogProduct.service.types';
 
+const MaskedView = MaskedViewComponent as unknown as React.ComponentType<MaskedViewProps>;
 const STAR_SIZE = 12;
 const MAX_STARS = 5;
 
@@ -80,7 +81,7 @@ const RatingStars = ({ rating }: { rating: number }) => {
     <View style={style.ratingStarWrapper}>
       {_renderFiveStars('#c2c2c2ff')}
       <MaskedView style={style.maskingStar} maskElement={_renderFiveStars('#000000')}>
-        <View style={style.yellowStar(fillPercentage)} />
+        <View style={[style.yellowStar, getStarWidthStyle(fillPercentage)]} />
       </MaskedView>
     </View>
   );

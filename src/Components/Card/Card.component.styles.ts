@@ -74,11 +74,10 @@ const style = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
-  yellowStar: (fillPercentage: number): ViewStyle => ({
-    width: `${fillPercentage}%`,
+  yellowStar: {
     height: '100%',
     backgroundColor: '#ebc002ff',
-  }),
+  },
   fiveStartWrapper: {
     flexDirection: 'row',
     gap: 2,
@@ -88,6 +87,10 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center', gap: 6,
   },
+});
+
+export const getStarWidthStyle = (fillPercentage: number): ViewStyle => ({
+  width: `${fillPercentage}%`,
 });
 
 export default style as Record<string, unknown>;
