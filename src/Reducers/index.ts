@@ -1,1 +1,1 @@
-export { detailProductReducer } from './DetailProductReducer/DetailProduct.reducer';
+export { catalogProductReducer } from './CatalogProductReducer/CatalogProduct.reducer';

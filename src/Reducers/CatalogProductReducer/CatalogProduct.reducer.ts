@@ -1,10 +1,10 @@
-import { DetailAction, DetailState } from './DetailProduct.reducer.types';
-import { DetailActionConstants } from '../../Shared';
+import { CatalogProductAction, CatalogProductState } from "./CatalogProduct.reducer.types";
+import { CatalogActionConstants } from "../../Shared";
 
 /**
  * Initial state
  */
-const initialState: DetailState = {
+const initialState: CatalogProductState = {
     data: [],
     loading: false,
     error: null,
@@ -14,28 +14,30 @@ const initialState: DetailState = {
  * Reducer for detail product
  * @param state - Initial state
  * @param action - Action to dispatch
- * @returns {DetailState} - Updated state
+ * @returns {CatalogProductState} - Updated state
  */
-export const detailProductReducer = (state = initialState, action: DetailAction): DetailState => {
+export const catalogProductReducer = (
+    state = initialState, action: CatalogProductAction,
+): CatalogProductState => {
     switch (action.type) {
-        case DetailActionConstants.SET_DATA_DETAIL_PRODUCT:
+        case CatalogActionConstants.SET_DATA_CATALOG_PRODUCT:
             return {
                 ...state,
                 data: action.payload,
             };
-        case DetailActionConstants.GET_DETAIL_PRODUCT_REQUEST:
+        case CatalogActionConstants.GET_CATALOG_PRODUCT_REQUEST:
             return {
                 ...state,
                 loading: true,
                 error: null,
             };
-        case DetailActionConstants.GET_DETAIL_PRODUCT_SUCCESS:
+        case CatalogActionConstants.GET_CATALOG_PRODUCT_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 data: action.payload,
             };
-        case DetailActionConstants.GET_DETAIL_PRODUCT_FAILED:
+        case CatalogActionConstants.GET_CATALOG_PRODUCT_FAILED:
             return {
                 ...state,
                 loading: false,

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { detailProductReducer } from "./DetailProduct.reducer";
+import { catalogProductReducer } from "./CatalogProduct.reducer";
 
 // eslint-disable-next-line max-lines-per-function
 describe("Reducer: DetailProduct", () => {
@@ -11,7 +11,7 @@ describe("Reducer: DetailProduct", () => {
             error: null,
         };
 
-        expect(detailProductReducer(initialState, { type: "SET_DATA_DETAIL_PRODUCT", payload: [] })).toEqual(initialState);
+        expect(catalogProductReducer(initialState, { type: "SET_DATA_DETAIL_PRODUCT", payload: [] })).toEqual(initialState);
     });
 
     it("should handle SET_DATA_DETAIL_PRODUCT", () => {
@@ -26,7 +26,7 @@ describe("Reducer: DetailProduct", () => {
             error: null,
         };
 
-        expect(detailProductReducer(undefined, action)).toEqual(expectedState);
+        expect(catalogProductReducer(undefined, action)).toEqual(expectedState);
     });
 
     it("should handle GET_DETAIL_PRODUCT_REQUEST", () => {
@@ -41,7 +41,7 @@ describe("Reducer: DetailProduct", () => {
             error: null,
         };
 
-        expect(detailProductReducer(undefined, action)).toEqual(expectedState);
+        expect(catalogProductReducer(undefined, action)).toEqual(expectedState);
     });
 
     it("should handle GET_DETAIL_PRODUCT_SUCCESS", () => {
@@ -56,7 +56,7 @@ describe("Reducer: DetailProduct", () => {
             error: null,
         };
 
-        expect(detailProductReducer(undefined, action)).toEqual(expectedState);
+        expect(catalogProductReducer(undefined, action)).toEqual(expectedState);
     });
 
     it("should handle GET_DETAIL_PRODUCT_FAILED", () => {
@@ -71,6 +71,6 @@ describe("Reducer: DetailProduct", () => {
             error: "Error",
         };
 
-        expect(detailProductReducer(undefined, action)).toEqual(expectedState);
+        expect(catalogProductReducer(undefined, action)).toEqual(expectedState);
     });
 });
