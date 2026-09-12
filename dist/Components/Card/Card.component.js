@@ -9,7 +9,9 @@ import ImageWithSkeleton from '../Image';
 const MaskedView = MaskedViewComponent;
 const STAR_SIZE = 12;
 const MAX_STARS = 5;
-const _renderImage = (image) => (<ImageWithSkeleton sourceUrl={image} style={style.imageContainer}/>);
+const _renderImage = (image, onCardPress, id) => (<TouchableOpacity onPress={() => onCardPress(id.toString())}>
+    <ImageWithSkeleton sourceUrl={image} style={style.imageContainer}/>
+  </TouchableOpacity>);
 const _renderPriceText = (price) => (<View style={style.priceTextWrapper}>
     <GeneralText variant={VARIANT.TITLE3}>
       Rp {price}
@@ -54,17 +56,17 @@ const _renderTitleBrand = (brand, rating) => (<View style={style.titleContainer}
     </GeneralText>
     <RatingStars rating={Number(rating)}/>
   </View>);
-const _renderTitleProduct = (title) => (<GeneralText numberOfLines={1} variant={VARIANT.LABEL1}>
+const _renderTitleProduct = (title, onCardPress, id) => (<GeneralText onPress={() => onCardPress(id.toString())} numberOfLines={1} variant={VARIANT.LABEL1}>
     {title}
   </GeneralText>);
-const _renderCaptionSection = ({ brand, title, rating }) => (<React.Fragment>
+const _renderCaptionSection = ({ brand, title, rating }, onCardPress, id) => (<React.Fragment>
     {_renderTitleBrand(brand, rating)}
-    {_renderTitleProduct(title)}
+    {_renderTitleProduct(title, onCardPress, id)}
   </React.Fragment>);
-const CardComponent = ({ data }) => (<View style={style.cardContainer}>
+const CardComponent = ({ data, onCardPress }) => (<View style={style.cardContainer}>
     {_renderTopSection(data.discountPercentage)}
-    {_renderImage(data.thumbnail)}
-    {_renderCaptionSection(data)}
+    {_renderImage(data.thumbnail, onCardPress, data.id)}
+    {_renderCaptionSection(data, onCardPress, data.id)}
     {_priceTagAndButtonCart(data)}
   </View>);
-export default CardComponent;
+export default React.memo(CardComponent);

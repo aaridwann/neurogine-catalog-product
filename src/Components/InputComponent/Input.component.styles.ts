@@ -102,6 +102,11 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 10,
   },
+  imageThumbnailSuggestion: {
+    width: 30,
+    height: 30,
+    borderRadius: 5,
+  },
 });
 
 export default styles;

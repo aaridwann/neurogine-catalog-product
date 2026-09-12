@@ -25,7 +25,6 @@ export const useCatalogProductInfinite = (params, options) => {
         }),
         initialPageParam: 0,
         getNextPageParam: (lastPage) => {
-            // 1. lastPage langsung mereferensi ke CatalogProductResponse dari page terakhir
             const skip = get(lastPage, 'skip', 0);
             const pageLimit = get(lastPage, 'limit', limit);
             const total = get(lastPage, 'total', 0);

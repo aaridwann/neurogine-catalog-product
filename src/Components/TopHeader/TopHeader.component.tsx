@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 
 import {
   Animated,
-  Keyboard,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
@@ -10,17 +9,16 @@ import {
 
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { noop } from 'lodash';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import GeneralText from '@Neurogine/ui-kit-general-text';
 import { VARIANT } from '@Neurogine/ui-kit-general-text/dist/Constants';
 
+import styles from './TopHeader.component.styles';
+import useHeader from '../../Hooks/UseHeader';
 import { HeaderCartButton } from '../HeaderCart/HeaderCard.component';
 import InputComponent from '../InputComponent';
-import styles from './TopHeader.component.styles';
 
-import type { DefaultOpacity } from './TopHeader.component.types';
-import type { SuggestionItem } from '../InputComponent/Input.component.types';
+import type { DefaultOpacity, PropsRenderSearchSection } from './TopHeader.component.types';
 import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
 
 /**
@@ -103,22 +101,14 @@ const _renderBackdrop = (
   );
 };
 
-interface PropsRenderSearchSection {
-  isSearchActive: boolean;
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-  toggleSearch: (active: boolean) => void;
-  searchOpacity: Animated.AnimatedInterpolation<number | string>;
-  sampleSuggestions: SuggestionItem[];
-}
-
 /**
  * Renders animated search input container with cancel action
  * @returns {React.ReactElement} Search input section
  */
 const _renderSearchSection = ({
   isSearchActive, searchQuery, setSearchQuery,
-  toggleSearch, searchOpacity, sampleSuggestions,
+  toggleSearch, searchOpacity, sampleSuggestions, isLoading,
+  onSelectSuggestion,
 }: PropsRenderSearchSection): React.ReactElement => (
   <Animated.View
     pointerEvents={isSearchActive ? 'auto' : 'none'}
@@ -128,6 +118,8 @@ const _renderSearchSection = ({
     ]}
   >
     <InputComponent
+      onSelectSuggestion={onSelectSuggestion}
+      isLoading={isLoading}
       iconName="search"
       suggestions={sampleSuggestions}
       autoFocus={isSearchActive}
@@ -151,95 +143,44 @@ const _renderSearchSection = ({
 );
 
 /**
- * Callback function to toggle search mode
- * @param {boolean} active - Whether search mode is active
- * @param {React.Dispatch<React.SetStateAction<boolean>>} setActive - Callback to set search mode
- * @param {Animated.Value} animValue - Animated value for search mode
- */
-const onToggleSearch = (
-  active: boolean,
-  setActive: React.Dispatch<React.SetStateAction<boolean>>,
-  animValue: Animated.Value,
-): void => {
-  if (!active) Keyboard.dismiss();
-
-  setActive(active);
-  Animated.timing(animValue, {
-    duration: 250,
-    toValue: active ? 1 : 0,
-    useNativeDriver: false,
-  }).start();
-};
-
-/**
- * Default opacity for header
- * @param animValue - Animated value for search mode
- * @returns {Animated.AnimatedInterpolation<number>} Animated opacity for header
- */
-const _defaultOpacity = (animValue: Animated.Value): Animated.AnimatedInterpolation<number> =>
-  animValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0],
-  });
-
-/**
- * Search opacity for header
- * @param animValue - Animated value for search mode
- * @returns {Animated.AnimatedInterpolation<number>} Animated opacity for search input
- */
-const _searchOpacity = (animValue: Animated.Value): Animated.AnimatedInterpolation<number> =>
-  animValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 1],
-  });
-
-/**
- * Sample suggestions for search input
- * @returns {SuggestionItem[]} Sample suggestions
- */
-const _sampleSuggestions = [
-  { id: '1', label: 'Sepatu Running Nike', subtitle: 'Kategori Sepatu' },
-  { id: '2', label: 'Sepatu Sneaker Casual', subtitle: 'Kategori Sepatu' },
-  { id: '3', label: 'Sepatu Futsal Adidas', subtitle: 'Kategori Olahraga' },
-];
-
-/**
  * Custom Header component integrating safe area insets, search bar, and backdrop dismiss
  * @param {_props} _props Navigation header properties
  * @returns {React.ReactElement} Custom header layout
  */
 export const CustomHeader = (_props: NativeStackHeaderProps): React.ReactElement => {
-  const insets = useSafeAreaInsets();
-  const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const animValue = useRef(new Animated.Value(0)).current;
-
-  const toggleSearch = React.useCallback((active: boolean) => {
-    onToggleSearch(active, setIsSearchActive, animValue);
-  }, []);
-
-  const defaultOpacity = _defaultOpacity(animValue);
-  const searchOpacity = _searchOpacity(animValue);
+  const {
+    isSearchActive,
+    insets,
+    defaultOpacity,
+    toggleSearch,
+    onSelectSuggestion,
+    query,
+    searchOpacity,
+    setQuery,
+    data,
+    isFetching,
+  } = useHeader(_props);
 
   return (
-    <>
+    <React.Fragment>
       <View style={[styles.headerContainer, { paddingTop: insets.top }]}>
         <View style={styles.contentWrapper}>
           {!isSearchActive && _renderUserSection({ defaultOpacity })}
           {!isSearchActive && _renderSearchTrigger({ defaultOpacity, toggleSearch })}
           {isSearchActive && _renderSearchSection({
+            onSelectSuggestion,
             isSearchActive,
-            searchQuery,
-            setSearchQuery,
+            searchQuery: query,
+            setSearchQuery: setQuery,
             toggleSearch,
             searchOpacity,
-            sampleSuggestions: _sampleSuggestions,
+            sampleSuggestions: data,
+            isLoading: isFetching,
           })}
         </View>
       </View>
-
-      {_renderBackdrop(isSearchActive, setSearchQuery, toggleSearch)}
-    </>
+      {_renderBackdrop(isSearchActive, setQuery, toggleSearch)}
+    </React.Fragment>
   );
 };
 

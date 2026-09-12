@@ -10,7 +10,7 @@ import CardComponent from '../../Components/Card/Card.component';
  * @param {VoidFunction} fetchNextPage - Callback function to fetch the next page
  * @returns {FlatListProps<CatalogItem>} FlatList props for products
  */
-const _getFlatListProductsProps = (products, hasNextPage, fetchNextPage) => ({
+const _getFlatListProductsProps = ({ products, hasNextPage, fetchNextPage, onSelectedProduct, }) => ({
     data: products,
     numColumns: 2,
     keyExtractor: (item) => item.id.toString(),
@@ -18,7 +18,7 @@ const _getFlatListProductsProps = (products, hasNextPage, fetchNextPage) => ({
     onEndReachedThreshold: 0.7,
     columnWrapperStyle: styles.columnWrapper,
     contentContainerStyle: styles.listContainer,
-    renderItem: ({ item }) => <CardComponent data={item} onFavoritePress={noop} onAddToCartPress={noop} onCardPress={noop}/>,
+    renderItem: ({ item }) => <CardComponent data={item} onFavoritePress={noop} onAddToCartPress={noop} onCardPress={onSelectedProduct}/>,
 });
 /**
  * CatalogProductScreenComponent is a component for the CatalogProductScreen.
@@ -27,10 +27,12 @@ const _getFlatListProductsProps = (products, hasNextPage, fetchNextPage) => ({
  * @param {Object} props.onGoBack - The callback function to go back.
  * @returns {React.Component} The CatalogProductScreenComponent.
  */
-const CatalogProductScreenComponent = ({ products, fetchNextPage, hasNextPage, isLoading }) => {
+const CatalogProductScreenComponent = ({ onSelectedProduct, products, fetchNextPage, hasNextPage, isLoading }) => {
     return (<View style={styles.container}>
       {isLoading ? <ActivityIndicator /> :
-            <FlatList {..._getFlatListProductsProps(products, hasNextPage, fetchNextPage)}/>}
+            <FlatList {..._getFlatListProductsProps({
+                products, hasNextPage, fetchNextPage, onSelectedProduct,
+            })}/>}
     </View>);
 };
 export default CatalogProductScreenComponent;

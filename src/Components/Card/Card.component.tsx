@@ -12,14 +12,16 @@ import style, { getStarWidthStyle } from './Card.component.styles';
 import ImageWithSkeleton from '../Image';
 
 import type { CardComponentProps } from './Card.component.types';
-import type { CatalogItem } from '../../Service/CatalogProduct.service.types';
+import type { CatalogItem } from '../../Service/Service.types';
 
 const MaskedView = MaskedViewComponent as unknown as React.ComponentType<MaskedViewProps>;
 const STAR_SIZE = 12;
 const MAX_STARS = 5;
 
-const _renderImage = (image: string) => (
-  <ImageWithSkeleton sourceUrl={image} style={style.imageContainer} />
+const _renderImage = (image: string, onCardPress: (id: string) => void, id: number) => (
+  <TouchableOpacity onPress={() => onCardPress(id.toString())}>
+    <ImageWithSkeleton sourceUrl={image} style={style.imageContainer} />
+  </TouchableOpacity>
 );
 
 const _renderPriceText = (price: number) => (
@@ -96,26 +98,33 @@ const _renderTitleBrand = (brand: string, rating: number) => (
   </View>
 );
 
-const _renderTitleProduct = (title: string) => (
-  <GeneralText numberOfLines={1} variant={VARIANT.LABEL1}>
+const _renderTitleProduct = (title: string, onCardPress: (id: string) => void, id: number) => (
+  <GeneralText
+    onPress={() => onCardPress(id.toString())}
+    numberOfLines={1}
+    variant={VARIANT.LABEL1}
+  >
     {title}
   </GeneralText>
 );
 
-const _renderCaptionSection = ({ brand, title, rating }: CatalogItem): React.JSX.Element => (
+const _renderCaptionSection = (
+  { brand, title, rating }: CatalogItem,
+  onCardPress: (id: string) => void, id: number,
+): React.JSX.Element => (
   <React.Fragment>
     {_renderTitleBrand(brand, rating)}
-    {_renderTitleProduct(title)}
+    {_renderTitleProduct(title, onCardPress, id)}
   </React.Fragment>
 );
 
-const CardComponent: React.FC<CardComponentProps> = ({ data }) => (
+const CardComponent: React.FC<CardComponentProps> = ({ data, onCardPress }) => (
   <View style={style.cardContainer}>
     {_renderTopSection(data.discountPercentage)}
-    {_renderImage(data.thumbnail)}
-    {_renderCaptionSection(data)}
+    {_renderImage(data.thumbnail, onCardPress, data.id)}
+    {_renderCaptionSection(data, onCardPress, data.id)}
     {_priceTagAndButtonCart(data)}
   </View>
 );
 
-export default CardComponent;
+export default React.memo(CardComponent);

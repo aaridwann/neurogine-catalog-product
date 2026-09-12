@@ -1,7 +1,8 @@
 import React from 'react';
 import get from 'lodash/get';
 import CatalogProductScreenComponent from './CatalogScreen.component';
-import { useCatalogProductInfinite } from '../../Service/CatalogProduct.service';
+import { defaultSearch } from './CatalogScreen.configs';
+import useCatalogProductInfinite from '../../Hooks/UseCatalog';
 /**
  * DetailScreenContainer is a container component for the DetailScreen.
  * It is also responsible for handling the navigation events.
@@ -11,18 +12,13 @@ import { useCatalogProductInfinite } from '../../Service/CatalogProduct.service'
  * @returns {React.Component} The DetailScreenComponent.
  */
 const CatalogProductScreen = ({ route, navigation }) => {
-    const [showBottomSheet, setShowBottomSheet] = React.useState(false);
-    const { data, isLoading, fetchNextPage, hasNextPage, error } = useCatalogProductInfinite({
-        limit: 10,
-        search: '',
-        category: '',
-    });
+    const { data, isLoading, fetchNextPage, hasNextPage, error, onSelectedProduct, } = useCatalogProductInfinite(navigation, defaultSearch);
     const title = get(route, 'params.title');
     const handleGoBack = () => {
         navigation.goBack();
     };
     const products = data?.pages.flatMap((page) => page.products) ?? [];
-    return (<CatalogProductScreenComponent route={route} title={title} onGoBack={handleGoBack} products={products} isLoading={isLoading} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} error={error}/>);
+    return (<CatalogProductScreenComponent onSelectedProduct={onSelectedProduct} route={route} title={title} onGoBack={handleGoBack} products={products} isLoading={isLoading} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} error={error}/>);
 };
 CatalogProductScreen.displayName = 'CatalogProductScreen';
 export default React.memo(CatalogProductScreen);

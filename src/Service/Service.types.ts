@@ -41,14 +41,11 @@ export interface CatalogItem {
 };
 
 export interface CatalogProductResponse {
-  pageParams: number[]
-  pages: {
-    limit: number;
-    products: CatalogItem[];
-    skip: number;
-    total: number;
-  }[];
-};
+  limit: number;
+  products: CatalogItem[];
+  skip: number;
+  total: number;
+}
 
 export interface FetchCatalogParams {
   skip?: number;
@@ -56,3 +53,10 @@ export interface FetchCatalogParams {
   search?: string;
   category?: string;
 };
+
+export interface ResultFetchByQuery {
+  limit: number
+  products: CatalogItem[]
+  skip: number
+  total: number
+}

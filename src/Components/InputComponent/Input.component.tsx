@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import {
   Animated,
+  Image,
   Text,
   TextInput,
   TouchableOpacity,
   View,
+  type NativeSyntheticEvent,
+  type TargetedEvent,
 } from 'react-native';
-// eslint-disable-next-line no-duplicate-imports
-import type { NativeSyntheticEvent, TargetedEvent } from 'react-native';
 
 import Ionicons from '@react-native-vector-icons/ionicons';
 
@@ -29,14 +30,15 @@ import type {
 } from './Input.component.types';
 
 /**
-   * Renders prefix leading icon if specified
-   * @returns {React.ReactNode} Prefix icon view or null
-   */
+ * Renders prefix leading icon if specified
+ * @returns {React.ReactNode} Prefix icon view or null
+ */
 const _renderLeadingIcon = ({
   iconName = 'search-outline',
   isFocused,
   activeColor,
   inactiveColor,
+  isLoading,
 }: PropsLoadingIcon): React.ReactNode => {
   if (!iconName) return null;
 
@@ -44,7 +46,7 @@ const _renderLeadingIcon = ({
     <View style={styles.leadingIcon}>
       <Ionicons
         color={isFocused ? activeColor : inactiveColor}
-        name={iconName}
+        name={isLoading ? 'refresh' : iconName}
         size={20}
       />
     </View>
@@ -153,11 +155,11 @@ const _renderSuggestionItem = ({
       setIsFocused(false);
     }}
   >
-    <Ionicons color="#8E8E93" name="search-outline" size={16} />
+    <Image source={{ uri: item.thumbnail }} style={styles.imageThumbnailSuggestion} />
     <View style={styles.suggestionTextContainer}>
-      <GeneralText variant={VARIANT.BODY1}>{item.label}</GeneralText>
-      {Boolean(item.subtitle) && (
-        <GeneralText variant={VARIANT.LABEL3}>{item.subtitle}</GeneralText>
+      <GeneralText variant={VARIANT.BODY1}>{item.title}</GeneralText>
+      {Boolean(item.title) && (
+        <GeneralText variant={VARIANT.LABEL3}>{item.category}</GeneralText>
       )}
     </View>
     <Ionicons color="#C7C7CC" name="arrow-forward-outline" size={14} />
@@ -271,11 +273,13 @@ const _renderContent: RenderContent = ({
   secureTextEntry,
   onClear,
   onChangeText,
+  isLoading,
 }) => (
   <Animated.View
     style={[ styles.container, { borderColor }, disabled && styles.disabledContainer ]}
   >
     {_renderLeadingIcon({
+      isLoading,
       iconName,
       activeColor: hooks.activeColor,
       inactiveColor: hooks.inactiveColor, isFocused: hooks.isFocused })}
@@ -311,6 +315,7 @@ const InputComponent = ({
   onBlur,
   onChangeText,
   onSelectSuggestion,
+  isLoading,
   ...restProps
 }: InputComponentProps): React.ReactElement => {
   const hooks = useInput({ ...restProps, value, secureTextEntry,
@@ -323,7 +328,7 @@ const InputComponent = ({
 
   return (
     <View style={[styles.wrapper, containerStyle]}>
-      {_renderContent({ hooks, borderColor, label, iconName,
+      {_renderContent({ isLoading, hooks, borderColor, label, iconName,
         value, disabled, secureTextEntry, onClear, onChangeText,
         setIsPasswordVisible: hooks.setIsPasswordVisible, restProps,
       })}

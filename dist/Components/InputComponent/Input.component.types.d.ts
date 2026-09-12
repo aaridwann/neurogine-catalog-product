@@ -1,11 +1,8 @@
 import type { Animated, NativeSyntheticEvent, StyleProp, TargetedEvent, TextInputProps, ViewStyle } from 'react-native';
+import type { CatalogItem } from '../../Service/Service.types';
 import type { VoidFunction } from '../../Types';
 import type { IoniconsIconName } from '@react-native-vector-icons/ionicons';
-export interface SuggestionItem {
-    id: string | number;
-    label: string;
-    subtitle?: string;
-}
+export type SuggestionItem = CatalogItem;
 export interface InputComponentProps extends Omit<TextInputProps, 'style'> {
     label: string;
     error?: string;
@@ -15,8 +12,10 @@ export interface InputComponentProps extends Omit<TextInputProps, 'style'> {
     containerStyle?: StyleProp<ViewStyle>;
     onClear?: () => void;
     onSelectSuggestion?: (item: SuggestionItem) => void;
+    isLoading?: boolean;
 }
 export interface PropsLoadingIcon {
+    isLoading: boolean;
     iconName: IoniconsIconName;
     isFocused: boolean;
     activeColor: string;
@@ -77,6 +76,7 @@ export interface RenderContentProps {
     onClear: () => void;
     onChangeText: (text: string) => void;
     setIsPasswordVisible: (value: boolean) => void;
+    isLoading: boolean;
 }
 export type RenderContent = (props: RenderContentProps) => React.ReactNode;
 //# sourceMappingURL=Input.component.types.d.ts.map

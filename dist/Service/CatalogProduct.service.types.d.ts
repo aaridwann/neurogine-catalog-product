@@ -53,4 +53,10 @@ export interface FetchCatalogParams {
     search?: string;
     category?: string;
 }
+export interface ResultFetchByQuery {
+    limit: number;
+    products: CatalogItem[];
+    skip: number;
+    total: number;
+}
 //# sourceMappingURL=CatalogProduct.service.types.d.ts.map

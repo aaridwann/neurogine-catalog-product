@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { ActivityIndicator, FlatList, View, type FlatListProps  } from 'react-native';
+import { ActivityIndicator, FlatList, View  } from 'react-native';
 
 import { noop } from 'lodash';
 
 import styles from './CatalogScreen.styles';
 import CardComponent from '../../Components/Card/Card.component';
 
-import type { CatalogProductScreenComponentProps } from './CatalogScreen.types';
-import type { CatalogItem } from '../../Service/CatalogProduct.service.types';
-import type { VoidFunction } from '../../Types';
+import type { CatalogProductScreenComponentProps, GetFlatListProductsProps } from './CatalogScreen.types';
+import type { CatalogItem } from '../../Service/Service.types';
 
 /**
  * Helper function to get FlatList products props
@@ -18,11 +17,12 @@ import type { VoidFunction } from '../../Types';
  * @param {VoidFunction} fetchNextPage - Callback function to fetch the next page
  * @returns {FlatListProps<CatalogItem>} FlatList props for products
  */
-const _getFlatListProductsProps =(
-  products: CatalogItem[],
-  hasNextPage: boolean,
-  fetchNextPage: VoidFunction,
-): FlatListProps<CatalogItem> => ({
+const _getFlatListProductsProps: GetFlatListProductsProps = ({
+  products,
+  hasNextPage,
+  fetchNextPage,
+  onSelectedProduct,
+}) => ({
   data: products,
   numColumns: 2,
   keyExtractor: (item: CatalogItem) => item.id.toString(),
@@ -35,7 +35,7 @@ const _getFlatListProductsProps =(
       data={item}
       onFavoritePress={noop}
       onAddToCartPress={noop}
-      onCardPress={noop}
+      onCardPress={onSelectedProduct}
     />,
 });
 
@@ -47,11 +47,13 @@ const _getFlatListProductsProps =(
  * @returns {React.Component} The CatalogProductScreenComponent.
  */
 const CatalogProductScreenComponent: React.FC<CatalogProductScreenComponentProps> =
-({ products, fetchNextPage, hasNextPage, isLoading }) => {
+({ onSelectedProduct, products, fetchNextPage, hasNextPage, isLoading }) => {
   return (
     <View style={styles.container}>
       {isLoading ? <ActivityIndicator/> :
-        <FlatList {..._getFlatListProductsProps(products, hasNextPage, fetchNextPage)}/>
+        <FlatList {..._getFlatListProductsProps({
+          products, hasNextPage, fetchNextPage, onSelectedProduct,
+        })}/>
       }
     </View>
   );

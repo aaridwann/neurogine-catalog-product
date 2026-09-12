@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Text, TextInput, TouchableOpacity, View, } from 'react-native';
+import { Animated, Image, Text, TextInput, TouchableOpacity, View, } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import GeneralText from '@Neurogine/ui-kit-general-text';
 import { VARIANT } from '@Neurogine/ui-kit-general-text/dist/Constants';
 import styles from './Input.component.styles';
 /**
-   * Renders prefix leading icon if specified
-   * @returns {React.ReactNode} Prefix icon view or null
-   */
-const _renderLeadingIcon = ({ iconName = 'search-outline', isFocused, activeColor, inactiveColor, }) => {
+ * Renders prefix leading icon if specified
+ * @returns {React.ReactNode} Prefix icon view or null
+ */
+const _renderLeadingIcon = ({ iconName = 'search-outline', isFocused, activeColor, inactiveColor, isLoading, }) => {
     if (!iconName)
         return null;
     return (<View style={styles.leadingIcon}>
-      <Ionicons color={isFocused ? activeColor : inactiveColor} name={iconName} size={20}/>
+      <Ionicons color={isFocused ? activeColor : inactiveColor} name={isLoading ? 'refresh' : iconName} size={20}/>
     </View>);
 };
 /**
@@ -54,10 +54,10 @@ const _renderSuggestionItem = ({ item, onSelectSuggestion, setIsFocused, }) => (
         onSelectSuggestion?.(item);
         setIsFocused(false);
     }}>
-    <Ionicons color="#8E8E93" name="search-outline" size={16}/>
+    <Image source={{ uri: item.thumbnail }} style={styles.imageThumbnailSuggestion}/>
     <View style={styles.suggestionTextContainer}>
-      <GeneralText variant={VARIANT.BODY1}>{item.label}</GeneralText>
-      {Boolean(item.subtitle) && (<GeneralText variant={VARIANT.LABEL3}>{item.subtitle}</GeneralText>)}
+      <GeneralText variant={VARIANT.BODY1}>{item.title}</GeneralText>
+      {Boolean(item.title) && (<GeneralText variant={VARIANT.LABEL3}>{item.category}</GeneralText>)}
     </View>
     <Ionicons color="#C7C7CC" name="arrow-forward-outline" size={14}/>
   </TouchableOpacity>);
@@ -130,8 +130,9 @@ const useInput = ({ value = '', secureTextEntry = false, error, onFocus, onBlur,
         handleBlur, labelStyle, activeColor, inactiveColor, showSuggestions, visibleSuggestions,
     };
 };
-const _renderContent = ({ hooks, borderColor, restProps, label, iconName, value, disabled, secureTextEntry, onClear, onChangeText, }) => (<Animated.View style={[styles.container, { borderColor }, disabled && styles.disabledContainer]}>
+const _renderContent = ({ hooks, borderColor, restProps, label, iconName, value, disabled, secureTextEntry, onClear, onChangeText, isLoading, }) => (<Animated.View style={[styles.container, { borderColor }, disabled && styles.disabledContainer]}>
     {_renderLeadingIcon({
+        isLoading,
         iconName,
         activeColor: hooks.activeColor,
         inactiveColor: hooks.inactiveColor, isFocused: hooks.isFocused
@@ -153,7 +154,7 @@ const _renderContent = ({ hooks, borderColor, restProps, label, iconName, value,
  * @param {InputComponentProps} props Input properties
  * @returns {React.ReactElement} Styled Input with suggestion layout
  */
-const InputComponent = ({ label, value = '', error, disabled = false, secureTextEntry = false, iconName, suggestions = [], containerStyle, onClear, onFocus, onBlur, onChangeText, onSelectSuggestion, ...restProps }) => {
+const InputComponent = ({ label, value = '', error, disabled = false, secureTextEntry = false, iconName, suggestions = [], containerStyle, onClear, onFocus, onBlur, onChangeText, onSelectSuggestion, isLoading, ...restProps }) => {
     const hooks = useInput({ ...restProps, value, secureTextEntry,
         label, error, onFocus, onBlur, suggestions });
     const borderColor = hooks.animatedValue.interpolate({
@@ -161,7 +162,7 @@ const InputComponent = ({ label, value = '', error, disabled = false, secureText
         outputRange: [error ? '#FF3B30' : '#E5E5EA', hooks.activeColor],
     });
     return (<View style={[styles.wrapper, containerStyle]}>
-      {_renderContent({ hooks, borderColor, label, iconName,
+      {_renderContent({ isLoading, hooks, borderColor, label, iconName,
             value, disabled, secureTextEntry, onClear, onChangeText,
             setIsPasswordVisible: hooks.setIsPasswordVisible, restProps,
         })}

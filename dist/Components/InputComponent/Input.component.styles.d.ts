@@ -103,6 +103,11 @@ declare const styles: Readonly<{
         width: string;
         zIndex: number;
     };
+    imageThumbnailSuggestion: {
+        width: number;
+        height: number;
+        borderRadius: number;
+    };
 }>;
 export default styles;
 //# sourceMappingURL=Input.component.styles.d.ts.map

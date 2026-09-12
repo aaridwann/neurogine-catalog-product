@@ -3,8 +3,8 @@ import React from 'react';
 import get from 'lodash/get';
 
 import CatalogProductScreenComponent from './CatalogScreen.component';
-import ProductsMock from '../../Fixture/Products.json';
-import { useCatalogProductInfinite } from '../../Service/CatalogProduct.service';
+import { defaultSearch } from './CatalogScreen.configs';
+import useCatalogProductInfinite from '../../Hooks/UseCatalog';
 
 import type { ParamListBase } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
@@ -18,13 +18,14 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack/lib/
  * @returns {React.Component} The DetailScreenComponent.
  */
 const CatalogProductScreen: React.ComponentType<NativeStackScreenProps<ParamListBase, 'CatalogProductScreen'>> = ({ route, navigation }) => {
-  const [showBottomSheet, setShowBottomSheet] = React.useState(false);
-
-  const { data, isLoading, fetchNextPage, hasNextPage, error } = useCatalogProductInfinite({
-    limit: 10,
-    search: '',
-    category: '',
-  });
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    error,
+    onSelectedProduct,
+  } = useCatalogProductInfinite(navigation, defaultSearch);
 
   const title = get(route, 'params.title') as string | undefined;
 
@@ -36,6 +37,7 @@ const CatalogProductScreen: React.ComponentType<NativeStackScreenProps<ParamList
 
   return (
     <CatalogProductScreenComponent
+      onSelectedProduct={onSelectedProduct}
       route={route}
       title={title}
       onGoBack={handleGoBack}
