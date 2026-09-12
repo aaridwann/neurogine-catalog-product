@@ -1,0 +1,1 @@
+{"version":3,"file":"CatalogScreen.types.d.ts","sourceRoot":"","sources":["../../../src/Screens/CatalogScreen/CatalogScreen.types.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,yBAAyB,EAAE,MAAM,aAAa,CAAC;AAExD,MAAM,WAAW,kCAAkC;IACjD,KAAK,EAAE,yBAAyB,CAAC,OAAO,CAAC,CAAC;IAC1C,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,QAAQ,EAAE,MAAM,IAAI,CAAC;CACtB"}
