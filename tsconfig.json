@@ -22,6 +22,12 @@
   "exclude": [
     "node_modules",
     "dist",
+    "src/**/*.test.ts",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.snap.test.tsx",
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx",
     "**/Pods"
   ]
 }
