@@ -100,7 +100,7 @@ const _renderTextInput = ({
  * Renders action buttons like clear text and password toggle
  * @returns {React.ReactNode} Action buttons row
  */
-const _renderActionButtons = ({
+export const _renderActionButtons = ({
   onClear,
   value,
   disabled,
@@ -111,6 +111,7 @@ const _renderActionButtons = ({
   <View style={styles.actionContainer}>
     {Boolean(onClear) && Boolean(value) && !disabled && (
       <TouchableOpacity
+        testID="action_button"
         activeOpacity={0.6}
         style={styles.actionButton}
         onPress={onClear}
@@ -121,6 +122,7 @@ const _renderActionButtons = ({
 
     {secureTextEntry && (
       <TouchableOpacity
+        testID="secure_text_button"
         activeOpacity={0.6}
         style={styles.actionButton}
         onPress={() => {
