@@ -10,8 +10,7 @@ import {
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { noop } from 'lodash';
 
-import GeneralText from '@Neurogine/ui-kit-general-text';
-import { VARIANT } from '@Neurogine/ui-kit-general-text/dist/Constants';
+import GeneralText, { Constants } from '@Neurogine/ui-kit-general-text';
 
 import styles from './TopHeader.component.styles';
 import useHeader from '../../Hooks/UseHeader';
@@ -20,6 +19,8 @@ import InputComponent from '../InputComponent';
 
 import type { DefaultOpacity, PropsRenderSearchSection } from './TopHeader.component.types';
 import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
+
+const { VARIANT } = Constants;
 
 /**
  * Renders the shopping cart button with counter

@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image Component Snap test should render correctly with a valid source URL and standard style 1`] = `
+<View
+  style={
+    [
+      {
+        "overflow": "hidden",
+        "position": "relative",
+      },
+      {
+        "borderRadius": 8,
+        "height": 100,
+        "width": 100,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "#d0d0d0ff",
+        "bottom": 0,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "zIndex": 1,
+      }
+    }
+  />
+  <Image
+    onLoadEnd={[Function]}
+    source={
+      {
+        "uri": "https://example.com/product-image.jpg",
+      }
+    }
+    style={
+      {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Image Component Snap test should render correctly with an empty source URL (shimmer/fallback state) 1`] = `
+<View
+  style={
+    [
+      {
+        "overflow": "hidden",
+        "position": "relative",
+      },
+      {
+        "height": 200,
+        "width": "100%",
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "#d0d0d0ff",
+        "bottom": 0,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "zIndex": 1,
+      }
+    }
+  />
+  <Image
+    onLoadEnd={[Function]}
+    source={
+      {
+        "uri": "",
+      }
+    }
+    style={
+      {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Image Component Snap test should render correctly with full width and circular style 1`] = `
+<View
+  style={
+    [
+      {
+        "overflow": "hidden",
+        "position": "relative",
+      },
+      {
+        "borderRadius": 30,
+        "height": 60,
+        "width": 60,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "#d0d0d0ff",
+        "bottom": 0,
+        "left": 0,
+        "opacity": 1,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "zIndex": 1,
+      }
+    }
+  />
+  <Image
+    onLoadEnd={[Function]}
+    source={
+      {
+        "uri": "https://example.com/avatar.jpg",
+      }
+    }
+    style={
+      {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  />
+</View>
+`;

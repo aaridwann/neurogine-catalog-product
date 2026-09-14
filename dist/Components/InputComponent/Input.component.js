@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Image, Text, TextInput, TouchableOpacity, View, } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
-import GeneralText from '@Neurogine/ui-kit-general-text';
-import { VARIANT } from '@Neurogine/ui-kit-general-text/dist/Constants';
+import GeneralText, { Constants } from '@Neurogine/ui-kit-general-text';
 import styles from './Input.component.styles';
+const { VARIANT } = Constants;
 /**
  * Renders prefix leading icon if specified
  * @returns {React.ReactNode} Prefix icon view or null
@@ -83,15 +83,15 @@ const _renderErrorText = (error) => {
     return null;
 };
 const _labelStyle = (animatedValue, activeColor, inactiveColor) => ({
-    color: animatedValue.interpolate({
+    color: animatedValue?.interpolate({
         inputRange: [0, 1],
         outputRange: [inactiveColor, activeColor],
     }),
-    fontSize: animatedValue.interpolate({
+    fontSize: animatedValue?.interpolate({
         inputRange: [0, 1],
         outputRange: [14, 11],
     }),
-    top: animatedValue.interpolate({
+    top: animatedValue?.interpolate({
         inputRange: [0, 1],
         outputRange: [20, 5],
     }),
@@ -175,4 +175,4 @@ const InputComponent = ({ label, value = '', error, disabled = false, secureText
       {_renderErrorText(error)}
     </View>);
 };
-export default React.memo(InputComponent);
+export default InputComponent;

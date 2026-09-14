@@ -5,8 +5,7 @@ import { TouchableOpacity, View } from 'react-native';
 import MaskedViewComponent, { type MaskedViewProps } from '@react-native-masked-view/masked-view';
 import { Ionicons } from '@react-native-vector-icons/ionicons/static';
 
-import GeneralText from '@Neurogine/ui-kit-general-text';
-import { VARIANT } from '@Neurogine/ui-kit-general-text/dist/Constants';
+import GeneralText, { Constants } from '@Neurogine/ui-kit-general-text';
 
 import style, { getStarWidthStyle } from './Card.component.styles';
 import ImageWithSkeleton from '../Image';
@@ -14,6 +13,7 @@ import ImageWithSkeleton from '../Image';
 import type { CardComponentProps } from './Card.component.types';
 import type { CatalogItem } from '../../Service/Service.types';
 
+const { VARIANT } = Constants;
 const MaskedView = MaskedViewComponent as unknown as React.ComponentType<MaskedViewProps>;
 const STAR_SIZE = 12;
 const MAX_STARS = 5;

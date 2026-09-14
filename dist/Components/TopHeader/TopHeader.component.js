@@ -2,12 +2,12 @@ import React from 'react';
 import { Animated, TouchableOpacity, TouchableWithoutFeedback, View, } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { noop } from 'lodash';
-import GeneralText from '@Neurogine/ui-kit-general-text';
-import { VARIANT } from '@Neurogine/ui-kit-general-text/dist/Constants';
+import GeneralText, { Constants } from '@Neurogine/ui-kit-general-text';
 import styles from './TopHeader.component.styles';
 import useHeader from '../../Hooks/UseHeader';
 import { HeaderCartButton } from '../HeaderCart/HeaderCard.component';
 import InputComponent from '../InputComponent';
+const { VARIANT } = Constants;
 /**
  * Renders the shopping cart button with counter
  * @returns {React.ReactElement} HeaderCartButton element

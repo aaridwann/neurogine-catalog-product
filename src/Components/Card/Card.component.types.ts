@@ -9,4 +9,5 @@ export interface CardComponentProps {
   onAddToCartPress: VoidFunctionComponent;
   onCardPress: VoidFunctionComponent;
 }
+
 export type MaskedViewProps = React.ComponentProps<typeof MaskedViewComponent>;

@@ -1,8 +1,5 @@
 import React from 'react';
-interface HeaderCartButtonProps {
-    itemCount?: number;
-    onPress: () => void;
-}
+import type { HeaderCartButtonProps } from './HeaderCard.component.types';
 export declare const HeaderCartButton: ({ itemCount, onPress, }: HeaderCartButtonProps) => React.ReactElement;
 declare const _default: React.MemoExoticComponent<({ itemCount, onPress, }: HeaderCartButtonProps) => React.ReactElement>;
 export default _default;

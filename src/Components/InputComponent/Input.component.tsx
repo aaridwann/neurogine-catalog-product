@@ -13,8 +13,7 @@ import {
 
 import Ionicons from '@react-native-vector-icons/ionicons';
 
-import GeneralText from '@Neurogine/ui-kit-general-text';
-import { VARIANT } from '@Neurogine/ui-kit-general-text/dist/Constants';
+import GeneralText, { Constants } from '@Neurogine/ui-kit-general-text';
 
 import styles from './Input.component.styles';
 
@@ -28,6 +27,8 @@ import type {
   HooksInputReturnType,
   RenderContent,
 } from './Input.component.types';
+
+const { VARIANT } = Constants;
 
 /**
  * Renders prefix leading icon if specified
@@ -199,15 +200,15 @@ const _renderErrorText = (error?: string): React.ReactNode => {
 };
 
 const _labelStyle= (animatedValue: Animated.Value, activeColor: string, inactiveColor: string) => ({
-  color: animatedValue.interpolate({
+  color: animatedValue?.interpolate({
     inputRange: [0, 1],
     outputRange: [inactiveColor, activeColor],
   }),
-  fontSize: animatedValue.interpolate({
+  fontSize: animatedValue?.interpolate({
     inputRange: [0, 1],
     outputRange: [14, 11],
   }),
-  top: animatedValue.interpolate({
+  top: animatedValue?.interpolate({
     inputRange: [0, 1],
     outputRange: [20, 5],
   }),
@@ -343,4 +344,4 @@ const InputComponent = ({
   );
 };
 
-export default React.memo(InputComponent);
+export default InputComponent;

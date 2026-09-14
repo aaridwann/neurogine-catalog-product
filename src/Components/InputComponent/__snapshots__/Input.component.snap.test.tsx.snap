@@ -1,0 +1,476 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Component Snap test should render correctly with an error message and value 1`] = `
+<View
+  style={
+    [
+      {
+        "marginBottom": 4,
+        "position": "relative",
+        "width": "100%",
+        "zIndex": 10,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#FAFAFA",
+        "borderColor": "rgba(255, 59, 48, 1)",
+        "borderRadius": 12,
+        "borderWidth": 0.2,
+        "flexDirection": "row",
+        "height": 52,
+        "paddingHorizontal": 14,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "marginRight": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#8E8E93",
+              "fontSize": 20,
+            },
+            undefined,
+          ]
+        }
+        testID="icon-search-outline"
+      >
+        Icon: search-outline
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "flex": 1,
+          "height": "100%",
+          "justifyContent": "center",
+          "position": "relative",
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        style={
+          {
+            "color": "rgba(255, 59, 48, 1)",
+            "fontSize": 11,
+            "fontWeight": "500",
+            "position": "absolute",
+            "top": 5,
+            "zIndex": 1,
+          }
+        }
+      >
+        Email Address
+      </Text>
+      <TextInput
+        editable={true}
+        onBlur={[Function]}
+        onChangeText={[MockFunction]}
+        onFocus={[Function]}
+        placeholder="Enter your email"
+        secureTextEntry={false}
+        style={
+          [
+            {
+              "color": "#1C1C1E",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "height": "100%",
+              "paddingBottom": 4,
+              "paddingTop": 18,
+            },
+            false,
+          ]
+        }
+        value="invalid-email"
+      />
+    </View>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "gap": 6,
+          "paddingLeft": 8,
+        }
+      }
+    />
+  </View>
+  <Text
+    style={
+      {
+        "color": "#FF3B30",
+        "fontSize": 11,
+        "fontWeight": "500",
+        "marginTop": 4,
+        "paddingLeft": 4,
+      }
+    }
+  >
+    Please enter a valid email address
+  </Text>
+</View>
+`;
+
+exports[`Input Component Snap test should render correctly with default props (label only) 1`] = `
+<View
+  style={
+    [
+      {
+        "marginBottom": 4,
+        "position": "relative",
+        "width": "100%",
+        "zIndex": 10,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#FAFAFA",
+        "borderColor": "rgba(229, 229, 234, 1)",
+        "borderRadius": 12,
+        "borderWidth": 0.2,
+        "flexDirection": "row",
+        "height": 52,
+        "paddingHorizontal": 14,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "marginRight": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#8E8E93",
+              "fontSize": 20,
+            },
+            undefined,
+          ]
+        }
+        testID="icon-search-outline"
+      >
+        Icon: search-outline
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "flex": 1,
+          "height": "100%",
+          "justifyContent": "center",
+          "position": "relative",
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        style={
+          {
+            "color": "rgba(142, 142, 147, 1)",
+            "fontSize": 14,
+            "fontWeight": "500",
+            "position": "absolute",
+            "top": 20,
+            "zIndex": 1,
+          }
+        }
+      >
+        Username
+      </Text>
+      <TextInput
+        editable={true}
+        onBlur={[Function]}
+        onChangeText={[MockFunction]}
+        onFocus={[Function]}
+        placeholder="Enter your username"
+        secureTextEntry={false}
+        style={
+          [
+            {
+              "color": "#1C1C1E",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "height": "100%",
+              "paddingBottom": 4,
+              "paddingTop": 18,
+            },
+            false,
+          ]
+        }
+        value=""
+      />
+    </View>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "gap": 6,
+          "paddingLeft": 8,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Input Component Snap test should render correctly with icon, clear button, and disabled state 1`] = `
+<View
+  style={
+    [
+      {
+        "marginBottom": 4,
+        "position": "relative",
+        "width": "100%",
+        "zIndex": 10,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#F2F2F7",
+        "borderColor": "#E5E5EA",
+        "borderRadius": 12,
+        "borderWidth": 0.2,
+        "flexDirection": "row",
+        "height": 52,
+        "paddingHorizontal": 14,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "marginRight": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#8E8E93",
+              "fontSize": 20,
+            },
+            undefined,
+          ]
+        }
+        testID="icon-search-outline"
+      >
+        Icon: search-outline
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "flex": 1,
+          "height": "100%",
+          "justifyContent": "center",
+          "position": "relative",
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        style={
+          {
+            "color": "rgba(0, 0, 0, 1)",
+            "fontSize": 11,
+            "fontWeight": "500",
+            "position": "absolute",
+            "top": 5,
+            "zIndex": 1,
+          }
+        }
+      >
+        Search Product
+      </Text>
+      <TextInput
+        editable={false}
+        onBlur={[Function]}
+        onChangeText={[MockFunction]}
+        onFocus={[Function]}
+        placeholder="Search..."
+        secureTextEntry={false}
+        style={
+          [
+            {
+              "color": "#1C1C1E",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "height": "100%",
+              "paddingBottom": 4,
+              "paddingTop": 18,
+            },
+            {
+              "color": "#AEAEB2",
+            },
+          ]
+        }
+        value="Laptop"
+      />
+    </View>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "gap": 6,
+          "paddingLeft": 8,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Input Component Snap test should render correctly with suggestions list and loading state 1`] = `
+<View
+  style={
+    [
+      {
+        "marginBottom": 4,
+        "position": "relative",
+        "width": "100%",
+        "zIndex": 10,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#FAFAFA",
+        "borderColor": "rgba(0, 0, 0, 1)",
+        "borderRadius": 12,
+        "borderWidth": 0.2,
+        "flexDirection": "row",
+        "height": 52,
+        "paddingHorizontal": 14,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "marginRight": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#8E8E93",
+              "fontSize": 20,
+            },
+            undefined,
+          ]
+        }
+        testID="icon-refresh"
+      >
+        Icon: refresh
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "flex": 1,
+          "height": "100%",
+          "justifyContent": "center",
+          "position": "relative",
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        style={
+          {
+            "color": "rgba(0, 0, 0, 1)",
+            "fontSize": 11,
+            "fontWeight": "500",
+            "position": "absolute",
+            "top": 5,
+            "zIndex": 1,
+          }
+        }
+      >
+        Product Search with Suggestions
+      </Text>
+      <TextInput
+        editable={true}
+        onBlur={[Function]}
+        onChangeText={[MockFunction]}
+        onFocus={[Function]}
+        placeholder="Type to search..."
+        secureTextEntry={false}
+        style={
+          [
+            {
+              "color": "#1C1C1E",
+              "fontSize": 14,
+              "fontWeight": "500",
+              "height": "100%",
+              "paddingBottom": 4,
+              "paddingTop": 18,
+            },
+            false,
+          ]
+        }
+        value="Wireless"
+      />
+    </View>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "gap": 6,
+          "paddingLeft": 8,
+        }
+      }
+    />
+  </View>
+</View>
+`;
