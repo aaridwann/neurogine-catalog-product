@@ -1,3 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Image, StyleSheet, View, } from 'react-native';
 import styles from './Image.component.styles';
@@ -10,11 +11,11 @@ import styles from './Image.component.styles';
 const _renderLoadingImage = (isLoading, opacityAnim) => {
     if (!isLoading)
         return null;
-    return (<Animated.View style={[
+    return (_jsx(Animated.View, { style: [
             StyleSheet.absoluteFill,
             styles.skeleton,
             { opacity: opacityAnim },
-        ]}/>);
+        ] }));
 };
 /**
  * Render image component
@@ -23,7 +24,7 @@ const _renderLoadingImage = (isLoading, opacityAnim) => {
  * @param {VoidFunction} onLoadEnd - Callback function to be called when image has finished loading
  * @returns {React.ReactElement} React.ReactElement
  */
-const _renderImage = (sourceUrl, style, onLoadEnd) => (<Image source={{ uri: sourceUrl }} style={style} onLoadEnd={onLoadEnd}/>);
+const _renderImage = (sourceUrl, style, onLoadEnd) => (_jsx(Image, { source: { uri: sourceUrl }, style: style, onLoadEnd: onLoadEnd }));
 /**
  * Render image with skeleton component
  * @param {string} sourceUrl - URL of the image
@@ -56,9 +57,6 @@ const ImageWithSkeleton = ({ sourceUrl, style }) => {
             }
         };
     }, [isLoading, opacityAnim]);
-    return (<View style={[styles.container, style]}>
-      {_renderLoadingImage(isLoading, opacityAnim)}
-      {_renderImage(sourceUrl, styles.image, () => setIsLoading(false))}
-    </View>);
+    return (_jsxs(View, { style: [styles.container, style], children: [_renderLoadingImage(isLoading, opacityAnim), _renderImage(sourceUrl, styles.image, () => setIsLoading(false))] }));
 };
 export default React.memo(ImageWithSkeleton);

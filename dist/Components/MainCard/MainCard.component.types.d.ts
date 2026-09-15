@@ -1,3 +1,4 @@
+import type { StyleProp, ViewStyle } from 'react-native';
 export interface MainCardProps {
     title?: string;
     subtitle?: string;
@@ -6,5 +7,8 @@ export interface MainCardProps {
     imageUrl?: string;
     onPress?: () => void;
     isLoading?: boolean;
+}
+export interface ShimmerItemProps {
+    style: StyleProp<ViewStyle>;
 }
 //# sourceMappingURL=MainCard.component.types.d.ts.map

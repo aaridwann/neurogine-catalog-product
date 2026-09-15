@@ -1,7 +1,7 @@
 declare const useProductSearch: () => {
-    data: import("../../Service/Service.types").CatalogItem[];
+    data: import("../../Service/Service.types").CatalogItem[] | undefined;
     isLoading: boolean;
-    error: Error;
+    error: Error | null;
     isFetching: boolean;
     isFetched: boolean;
 };

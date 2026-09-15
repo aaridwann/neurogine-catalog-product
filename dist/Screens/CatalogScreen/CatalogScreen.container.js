@@ -1,3 +1,4 @@
+import { jsx as _jsx } from "react/jsx-runtime";
 import React from 'react';
 import get from 'lodash/get';
 import CatalogProductScreenComponent from './CatalogScreen.component';
@@ -18,7 +19,7 @@ const CatalogProductScreen = ({ route, navigation }) => {
         navigation.goBack();
     };
     const products = data?.pages.flatMap((page) => page.products) ?? [];
-    return (<CatalogProductScreenComponent onSelectedProduct={onSelectedProduct} route={route} title={title} onGoBack={handleGoBack} products={products} isLoading={isLoading} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} error={error} onRefresh={refetch} isRefresh={isRefetching}/>);
+    return (_jsx(CatalogProductScreenComponent, { onSelectedProduct: onSelectedProduct, route: route, title: title, onGoBack: handleGoBack, products: products, isLoading: isLoading, fetchNextPage: fetchNextPage, hasNextPage: hasNextPage, error: error, onRefresh: refetch, isRefresh: isRefetching }));
 };
 CatalogProductScreen.displayName = 'CatalogProductScreen';
 export default React.memo(CatalogProductScreen);

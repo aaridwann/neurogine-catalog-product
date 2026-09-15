@@ -1,3 +1,4 @@
+import { jsx as _jsx } from "react/jsx-runtime";
 import React from 'react';
 import { CustomHeader } from '../Components/TopHeader/TopHeader.component';
 import { CatalogRoutes } from '../Shared';
@@ -11,7 +12,7 @@ const CatalogProductScreens = [
         name: CatalogRoutes.CATALOG_PRODUCT_ROUTE,
         component: CatalogProductScreen,
         options: {
-            header: (props) => <CustomHeader {...props}/>,
+            header: (props) => _jsx(CustomHeader, { ...props }),
         },
     },
 ];

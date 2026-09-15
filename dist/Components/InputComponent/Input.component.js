@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useEffect, useRef, useState } from 'react';
 import { Animated, Image, Text, TextInput, TouchableOpacity, View, } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import GeneralText, { Constants } from '@Neurogine/ui-kit-general-text';
@@ -11,9 +12,7 @@ const { VARIANT } = Constants;
 const _renderLeadingIcon = ({ iconName = 'search-outline', isFocused, activeColor, inactiveColor, isLoading, }) => {
     if (!iconName)
         return null;
-    return (<View style={styles.leadingIcon}>
-      <Ionicons color={isFocused ? activeColor : inactiveColor} name={isLoading ? 'refresh' : iconName} size={20}/>
-    </View>);
+    return (_jsx(View, { style: styles.leadingIcon, children: _jsx(Ionicons, { color: isFocused ? activeColor : inactiveColor, name: isLoading ? 'refresh' : iconName, size: 20 }) }));
 };
 /**
  * Render label component
@@ -21,46 +20,29 @@ const _renderLeadingIcon = ({ iconName = 'search-outline', isFocused, activeColo
  * @param labelStyle Input label style
  * @returns Label component
  */
-const _renderLabel = (label, labelStyle) => (<Animated.Text style={[styles.label, labelStyle]}>
-    {label}
-  </Animated.Text>);
+const _renderLabel = (label, labelStyle) => (_jsx(Animated.Text, { style: [styles.label, labelStyle], children: label }));
 /**
  * Renders the core TextInput element
  * @param {PropsRenderTextInput} props Helper props
  * @returns {React.ReactElement} TextInput node
  */
-const _renderTextInput = ({ disabled, secureTextEntry, isPasswordVisible, value, handleBlur, onChangeText, handleFocus, ...restProps }) => (<TextInput editable={!disabled} secureTextEntry={secureTextEntry && !isPasswordVisible} style={[styles.input, disabled && styles.disabledInput]} value={value} onBlur={handleBlur} onChangeText={onChangeText} onFocus={handleFocus} {...restProps}/>);
+const _renderTextInput = ({ disabled, secureTextEntry, isPasswordVisible, value, handleBlur, onChangeText, handleFocus, ...restProps }) => (_jsx(TextInput, { editable: !disabled, secureTextEntry: secureTextEntry && !isPasswordVisible, style: [styles.input, disabled && styles.disabledInput], value: value, onBlur: handleBlur, onChangeText: onChangeText, onFocus: handleFocus, ...restProps }));
 /**
  * Renders action buttons like clear text and password toggle
  * @returns {React.ReactNode} Action buttons row
  */
-export const _renderActionButtons = ({ onClear, value, disabled, secureTextEntry, isPasswordVisible, setIsPasswordVisible, }) => (<View style={styles.actionContainer}>
-    {Boolean(onClear) && Boolean(value) && !disabled && (<TouchableOpacity testID="action_button" activeOpacity={0.6} style={styles.actionButton} onPress={onClear}>
-        <Ionicons color="#8E8E93" name="close-circle" size={18}/>
-      </TouchableOpacity>)}
-
-    {secureTextEntry && (<TouchableOpacity testID="secure_text_button" activeOpacity={0.6} style={styles.actionButton} onPress={() => {
-            setIsPasswordVisible((prev) => !prev);
-        }}>
-        <Ionicons color="#8E8E93" name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'} size={18}/>
-      </TouchableOpacity>)}
-  </View>);
+export const _renderActionButtons = ({ onClear, value, disabled, secureTextEntry, isPasswordVisible, setIsPasswordVisible, }) => (_jsxs(View, { style: styles.actionContainer, children: [Boolean(onClear) && Boolean(value) && !disabled && (_jsx(TouchableOpacity, { testID: "action_button", activeOpacity: 0.6, style: styles.actionButton, onPress: onClear, children: _jsx(Ionicons, { color: "#8E8E93", name: "close-circle", size: 18 }) })), secureTextEntry && (_jsx(TouchableOpacity, { testID: "secure_text_button", activeOpacity: 0.6, style: styles.actionButton, onPress: () => {
+                setIsPasswordVisible((prev) => !prev);
+            }, children: _jsx(Ionicons, { color: "#8E8E93", name: isPasswordVisible ? 'eye-off-outline' : 'eye-outline', size: 18 }) }))] }));
 /**
  * Renders single suggestion item row
  * @param {SuggestionItem} item Suggestion data object
  * @returns {React.ReactElement} Touchable item row
  */
-const _renderSuggestionItem = ({ item, onSelectSuggestion, setIsFocused, }) => (<TouchableOpacity key={item.id} activeOpacity={0.7} style={styles.suggestionItem} onPress={() => {
+const _renderSuggestionItem = ({ item, onSelectSuggestion, setIsFocused, }) => (_jsxs(TouchableOpacity, { activeOpacity: 0.7, style: styles.suggestionItem, onPress: () => {
         onSelectSuggestion?.(item);
         setIsFocused(false);
-    }}>
-    <Image source={{ uri: item.thumbnail }} style={styles.imageThumbnailSuggestion}/>
-    <View style={styles.suggestionTextContainer}>
-      <GeneralText variant={VARIANT.BODY1}>{item.title}</GeneralText>
-      {Boolean(item.title) && (<GeneralText variant={VARIANT.LABEL3}>{item.category}</GeneralText>)}
-    </View>
-    <Ionicons color="#C7C7CC" name="arrow-forward-outline" size={14}/>
-  </TouchableOpacity>);
+    }, children: [_jsx(Image, { source: { uri: item.thumbnail }, style: styles.imageThumbnailSuggestion }), _jsxs(View, { style: styles.suggestionTextContainer, children: [_jsx(GeneralText, { variant: VARIANT.BODY1, children: item.title }), Boolean(item.title) && (_jsx(GeneralText, { variant: VARIANT.LABEL3, children: item.category }))] }), _jsx(Ionicons, { color: "#C7C7CC", name: "arrow-forward-outline", size: 14 })] }, item.id));
 /**
  * Renders suggestion list container under input
  * @returns {React.ReactNode} Suggestion list component or null
@@ -68,9 +50,7 @@ const _renderSuggestionItem = ({ item, onSelectSuggestion, setIsFocused, }) => (
 const _renderSuggestionList = ({ showSuggestions, visibleSuggestions, onSelectSuggestion, setIsFocused, }) => {
     if (!showSuggestions)
         return null;
-    return (<View style={styles.suggestionDropdown}>
-      {visibleSuggestions.map((item) => _renderSuggestionItem({ item, onSelectSuggestion, setIsFocused }))}
-    </View>);
+    return (_jsx(View, { style: styles.suggestionDropdown, children: visibleSuggestions.map((item) => _renderSuggestionItem({ item, onSelectSuggestion, setIsFocused })) }));
 };
 /**
  * Render error text if error is provided
@@ -79,7 +59,7 @@ const _renderSuggestionList = ({ showSuggestions, visibleSuggestions, onSelectSu
  */
 const _renderErrorText = (error) => {
     if (error)
-        return <Text style={styles.errorText}>{error}</Text>;
+        return _jsx(Text, { style: styles.errorText, children: error });
     return null;
 };
 const _labelStyle = (animatedValue, activeColor, inactiveColor) => ({
@@ -130,25 +110,18 @@ const useInput = ({ value = '', secureTextEntry = false, error, onFocus, onBlur,
         handleBlur, labelStyle, activeColor, inactiveColor, showSuggestions, visibleSuggestions,
     };
 };
-const _renderContent = ({ hooks, borderColor, restProps, label, iconName, value, disabled, secureTextEntry, onClear, onChangeText, isLoading, }) => (<Animated.View style={[styles.container, { borderColor }, disabled && styles.disabledContainer]}>
-    {_renderLeadingIcon({
-        isLoading,
-        iconName,
-        activeColor: hooks.activeColor,
-        inactiveColor: hooks.inactiveColor, isFocused: hooks.isFocused
-    })}
-    <View style={styles.inputFieldWrapper}>
-      {_renderLabel(label, hooks.labelStyle)}
-      {_renderTextInput({
-        disabled, secureTextEntry, isPasswordVisible: hooks.isPasswordVisible,
-        value, handleBlur: hooks.handleBlur, onChangeText,
-        handleFocus: hooks.handleFocus, ...restProps
-    })}
-    </View>
-    {_renderActionButtons({ onClear, value, disabled, secureTextEntry,
-        isPasswordVisible: hooks.isPasswordVisible,
-        setIsPasswordVisible: hooks.setIsPasswordVisible })}
-  </Animated.View>);
+const _renderContent = ({ hooks, borderColor, restProps, label, iconName, value, disabled, secureTextEntry, onClear, onChangeText, isLoading, }) => (_jsxs(Animated.View, { style: [styles.container, { borderColor }, disabled && styles.disabledContainer], children: [_renderLeadingIcon({
+            isLoading,
+            iconName,
+            activeColor: hooks.activeColor,
+            inactiveColor: hooks.inactiveColor, isFocused: hooks.isFocused
+        }), _jsxs(View, { style: styles.inputFieldWrapper, children: [_renderLabel(label, hooks.labelStyle), _renderTextInput({
+                    disabled, secureTextEntry, isPasswordVisible: hooks.isPasswordVisible,
+                    value, handleBlur: hooks.handleBlur, onChangeText,
+                    handleFocus: hooks.handleFocus, ...restProps
+                })] }), _renderActionButtons({ onClear, value, disabled, secureTextEntry,
+            isPasswordVisible: hooks.isPasswordVisible,
+            setIsPasswordVisible: hooks.setIsPasswordVisible })] }));
 /**
  * Modern Minimalist Input Component with Suggestion Dropdown
  * @param {InputComponentProps} props Input properties
@@ -161,18 +134,14 @@ const InputComponent = ({ label, value = '', error, disabled = false, secureText
         inputRange: [0, 1],
         outputRange: [error ? '#FF3B30' : '#E5E5EA', hooks.activeColor],
     });
-    return (<View style={[styles.wrapper, containerStyle]}>
-      {_renderContent({ isLoading, hooks, borderColor, label, iconName,
-            value, disabled, secureTextEntry, onClear, onChangeText,
-            setIsPasswordVisible: hooks.setIsPasswordVisible, restProps,
-        })}
-      {_renderSuggestionList({
-            showSuggestions: hooks.showSuggestions,
-            visibleSuggestions: hooks.visibleSuggestions,
-            onSelectSuggestion,
-            setIsFocused: hooks.setIsFocused,
-        })}
-      {_renderErrorText(error)}
-    </View>);
+    return (_jsxs(View, { style: [styles.wrapper, containerStyle], children: [_renderContent({ isLoading, hooks, borderColor, label, iconName,
+                value, disabled, secureTextEntry, onClear, onChangeText,
+                setIsPasswordVisible: hooks.setIsPasswordVisible, restProps,
+            }), _renderSuggestionList({
+                showSuggestions: hooks.showSuggestions,
+                visibleSuggestions: hooks.visibleSuggestions,
+                onSelectSuggestion,
+                setIsFocused: hooks.setIsFocused,
+            }), _renderErrorText(error)] }));
 };
 export default InputComponent;

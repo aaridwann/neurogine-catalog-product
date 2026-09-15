@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useEffect, useRef } from 'react';
 import { Text, View, ImageBackground, TouchableOpacity, Animated, Easing, StyleSheet, } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './MainCard.component.styles';
@@ -18,54 +19,18 @@ const ShimmerItem = ({ style }) => {
         inputRange: [0, 1],
         outputRange: [-300, 300],
     });
-    return (<View style={[styles.shimmerBase, style]}>
-      <Animated.View style={[
-            StyleSheet.absoluteFill,
-            { transform: [{ translateX }] },
-        ]}>
-        <LinearGradient colors={['#E0E0E0', '#F5F5F5', '#E0E0E0']} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={styles.gradient}/>
-      </Animated.View>
-    </View>);
+    return (_jsx(View, { style: [styles.shimmerBase, style], children: _jsx(Animated.View, { style: [
+                StyleSheet.absoluteFill,
+                { transform: [{ translateX }] },
+            ], children: _jsx(LinearGradient, { colors: ['#E0E0E0', '#F5F5F5', '#E0E0E0'], start: { x: 0, y: 0.5 }, end: { x: 1, y: 0.5 }, style: styles.gradient }) }) }));
 };
 // Render Skeleton saat isLoading = true
-const _renderSkeletonContent = () => (<View style={styles.cardContainer}>
-    <View style={styles.skeletonContainer}>
-      <ShimmerItem style={styles.skeletonTag}/>
-      <View style={styles.skeletonBody}>
-        <ShimmerItem style={styles.skeletonTitleLine1}/>
-        <ShimmerItem style={styles.skeletonTitleLine2}/>
-        <ShimmerItem style={styles.skeletonSubtitle}/>
-        <ShimmerItem style={styles.skeletonButton}/>
-      </View>
-    </View>
-  </View>);
-const _renderHeader = (tagline) => (<View style={styles.tagContainer}>
-    <Text style={styles.tagText}>{tagline}</Text>
-  </View>);
-const _renderBody = ({ title, subtitle, buttonText, }) => (<View style={styles.contentContainer}>
-    <Text style={styles.titleText} numberOfLines={2}>
-      {title}
-    </Text>
-
-    <Text style={styles.subtitleText} numberOfLines={2}>
-      {subtitle}
-    </Text>
-
-    <View style={styles.ctaButton}>
-      <Text style={styles.ctaButtonText}>{buttonText}</Text>
-    </View>
-  </View>);
+const _renderSkeletonContent = () => (_jsx(View, { style: styles.cardContainer, children: _jsxs(View, { style: styles.skeletonContainer, children: [_jsx(ShimmerItem, { style: styles.skeletonTag }), _jsxs(View, { style: styles.skeletonBody, children: [_jsx(ShimmerItem, { style: styles.skeletonTitleLine1 }), _jsx(ShimmerItem, { style: styles.skeletonTitleLine2 }), _jsx(ShimmerItem, { style: styles.skeletonSubtitle }), _jsx(ShimmerItem, { style: styles.skeletonButton })] })] }) }));
+const _renderHeader = (tagline) => (_jsx(View, { style: styles.tagContainer, children: _jsx(Text, { style: styles.tagText, children: tagline }) }));
+const _renderBody = ({ title, subtitle, buttonText, }) => (_jsxs(View, { style: styles.contentContainer, children: [_jsx(Text, { style: styles.titleText, numberOfLines: 2, children: title }), _jsx(Text, { style: styles.subtitleText, numberOfLines: 2, children: subtitle }), _jsx(View, { style: styles.ctaButton, children: _jsx(Text, { style: styles.ctaButtonText, children: buttonText }) })] }));
 const MainCard = ({ title = 'Explore Our Latest Features', subtitle = 'Discover seamless digital banking experience powered by modern modular architecture.', tagline = 'PROMOTED', buttonText = 'Explore Now', imageUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80', isLoading = false, onPress, }) => {
-    if (isLoading) {
+    if (isLoading)
         return _renderSkeletonContent();
-    }
-    return (<TouchableOpacity activeOpacity={0.9} onPress={onPress} style={styles.cardContainer}>
-      <ImageBackground source={{ uri: imageUrl }} style={styles.imageBackground} imageStyle={styles.imageStyle}>
-        <LinearGradient colors={['transparent', 'rgba(0,0,0,0.4)', 'rgba(0,0,0,0.85)']} style={styles.gradientOverlay}>
-          {_renderHeader(tagline)}
-          {_renderBody({ title, subtitle, buttonText })}
-        </LinearGradient>
-      </ImageBackground>
-    </TouchableOpacity>);
+    return (_jsx(TouchableOpacity, { activeOpacity: 0.9, onPress: onPress, style: styles.cardContainer, children: _jsx(ImageBackground, { source: { uri: imageUrl }, style: styles.imageBackground, imageStyle: styles.imageStyle, children: _jsxs(LinearGradient, { colors: ['transparent', 'rgba(0,0,0,0.4)', 'rgba(0,0,0,0.85)'], style: styles.gradientOverlay, children: [_renderHeader(tagline), _renderBody({ title, subtitle, buttonText })] }) }) }));
 };
 export default MainCard;

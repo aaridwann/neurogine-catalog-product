@@ -5,7 +5,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 export declare const catalogKeys: {
     all: readonly ["catalog"];
     lists: () => readonly ["catalog", "list"];
-    list: (params?: FetchCatalogParams) => readonly ["catalog", "list", FetchCatalogParams];
+    list: (params?: FetchCatalogParams) => readonly ["catalog", "list", FetchCatalogParams | undefined];
     details: () => readonly ["catalog", "detail"];
     detail: (id: string) => readonly ["catalog", "detail", string];
 };
