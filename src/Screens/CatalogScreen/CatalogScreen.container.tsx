@@ -25,6 +25,8 @@ const CatalogProductScreen: React.ComponentType<NativeStackScreenProps<ParamList
     hasNextPage,
     error,
     onSelectedProduct,
+    refetch,
+    isRefetching,
   } = useCatalogProductInfinite(navigation, defaultSearch);
 
   const title = get(route, 'params.title') as string | undefined;
@@ -46,6 +48,8 @@ const CatalogProductScreen: React.ComponentType<NativeStackScreenProps<ParamList
       fetchNextPage={fetchNextPage}
       hasNextPage={hasNextPage}
       error={error}
+      onRefresh={refetch}
+      isRefresh={isRefetching}
     />
   );
 };

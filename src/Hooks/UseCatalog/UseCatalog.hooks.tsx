@@ -1,8 +1,10 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import get from 'lodash/get';
+import { useDispatch } from 'react-redux';
 
 import { useInfiniteQuery } from '@Neurogine/core-network';
+import { snackbarActions } from '@Neurogine/root';
 
 import CatalogService from '../../Service/CatalogService';
 
@@ -68,6 +70,7 @@ export const useCatalogProductInfinite = (
   params?: FetchCatalogParams,
   options?: UseCatalogInfiniteOptions,
 ): UseCatalogInfiniteResult => {
+  const dispatch = useDispatch();
   const limit = params?.limit ?? DEFAULT_TAKE;
 
   const onSelectedProduct = useCallback((id: string) =>
@@ -76,6 +79,18 @@ export const useCatalogProductInfinite = (
   const onFavoriteProduct = useCallback(_onFavoriteProductHandler, [navigation]);
   const onAddToCartProduct = useCallback(_onAddToCartProductHandler, [navigation]);
   const query = useInfiniteQuery({ ..._getConfigsInfiniteQuery(params, limit), ...options });
+
+  useEffect(() => {
+    if (query.isError) {
+      dispatch(snackbarActions.showSnackbar({
+        type: 'error',
+        title: 'Something went wrong',
+        message: 'An unexpected error occurred. Please try again later.',
+        position: 'bottom',
+        duration: 5000,
+      }));
+    }
+  }, [query.isError]);
 
   return {
     ...query,

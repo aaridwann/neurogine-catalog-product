@@ -27,6 +27,17 @@ jest
   });
 
 describe('Input Component Snap test', () => {
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    // Selesaikan semua timer/animasi gantung sebelum test di-tear down
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
+  });
+  
   const mockSuggestionItem = {
     id: 1,
     title: 'Wireless Mouse',

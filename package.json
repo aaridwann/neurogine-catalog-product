@@ -71,6 +71,7 @@
   },
   "dependencies": {
     "@Neurogine/core-network": "https://github.com/aaridwann/neurogine-core-network.git#master",
+    "@Neurogine/root": "https://github.com/aaridwann/neurogine-root.git#master",
     "@Neurogine/ui-kit-button": "https://github.com/aaridwann/neurogine-ui-kit-button.git#d3c497658ff1bcf23298ce04d69e783c0cf4eb6b",
     "@Neurogine/ui-kit-general-text": "https://github.com/aaridwann/neurogine-ui-kit-general-text.git#d91430949c388958a685562a8d64c37d469dd542",
     "@react-native-masked-view/masked-view": "^0.3.2",
@@ -81,6 +82,7 @@
     "@reduxjs/toolkit": "^2.12.0",
     "fast-memoize": "^2.5.2",
     "lodash": "^4.18.1",
+    "react-native-linear-gradient": "^2.8.3",
     "react-native-reanimated": "^4.6.0",
     "react-native-safe-area-context": "^5.9.1",
     "react-redux": "^9.3.0",

@@ -1,7 +1,7 @@
 import type { FlatListProps } from 'react-native';
 
 import type { CatalogItem } from '../../Service/Service.types';
-import type { CatalogProductScreenProps } from '../../Types';
+import type { CatalogProductScreenProps, VoidFunction } from '../../Types';
 
 export interface CatalogProductScreenComponentProps {
   route: CatalogProductScreenProps['route'];
@@ -13,6 +13,8 @@ export interface CatalogProductScreenComponentProps {
   hasNextPage: boolean;
   error: Error | null;
   onSelectedProduct: (id: string) => void;
+  isRefresh: boolean,
+  onRefresh: VoidFunction,
 };
 
 export type GetFlatListProductsProps = (params: Partial<CatalogProductScreenComponentProps>) =>

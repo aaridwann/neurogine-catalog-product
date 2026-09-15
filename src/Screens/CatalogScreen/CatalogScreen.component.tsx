@@ -1,14 +1,45 @@
 import React from 'react';
 
-import { ActivityIndicator, FlatList, View  } from 'react-native';
+import { FlatList, RefreshControl, View  } from 'react-native';
 
 import { noop } from 'lodash';
 
+import AdBannerList from './AdsSection/AdsSection.component';
 import styles from './CatalogScreen.styles';
 import CardComponent from '../../Components/Card/Card.component';
+import ShimmeringCardProduct from '../../Components/ShimeringCard';
 
 import type { CatalogProductScreenComponentProps, GetFlatListProductsProps } from './CatalogScreen.types';
 import type { CatalogItem } from '../../Service/Service.types';
+
+const _renderSpecialSection = (isLoading: boolean) => (
+  <View style={styles.specialContentWrapper}>
+    <AdBannerList isLoading={isLoading} />
+  </View>
+);
+
+const _renderShimmering = () => (
+  <View style={styles.emptyGridContainer}>
+    {Array.from({ length: 6 }).map((_, index) => (
+      <View key={index} style={styles.cardWrapper}>
+        <ShimmeringCardProduct />
+      </View>
+    ))}
+  </View>
+);
+
+const _gerPropsPullToRefresh = (refreshing: boolean, onRefresh: () => void) => ({
+  refreshControl:
+    <RefreshControl
+      colors={['#3aa6ffff', '#6db5ffff']}
+      onRefresh={onRefresh}
+      progressBackgroundColor="#FFFFFF"
+      refreshing={refreshing}
+      tintColor="#3aa6ffff"
+      title={'Loading...'}
+      titleColor="#3aa6ffff"
+    />,
+});
 
 /**
  * Helper function to get FlatList products props
@@ -22,7 +53,13 @@ const _getFlatListProductsProps: GetFlatListProductsProps = ({
   hasNextPage,
   fetchNextPage,
   onSelectedProduct,
+  isLoading,
+  isRefresh,
+  onRefresh,
 }) => ({
+  ..._gerPropsPullToRefresh(isRefresh, onRefresh),
+  ListHeaderComponent: () => _renderSpecialSection(isLoading || isRefresh),
+  ListEmptyComponent: _renderShimmering,
   data: products,
   numColumns: 2,
   keyExtractor: (item: CatalogItem) => item.id.toString(),
@@ -30,8 +67,9 @@ const _getFlatListProductsProps: GetFlatListProductsProps = ({
   onEndReachedThreshold: 0.7,
   columnWrapperStyle: styles.columnWrapper,
   contentContainerStyle: styles.listContainer,
+  showsHorizontalScrollIndicator: false,
   renderItem: ({ item }: { item: CatalogItem }) =>
-    <CardComponent
+    isRefresh ? _renderShimmering() : <CardComponent
       data={item}
       onFavoritePress={noop}
       onAddToCartPress={noop}
@@ -47,16 +85,17 @@ const _getFlatListProductsProps: GetFlatListProductsProps = ({
  * @returns {React.Component} The CatalogProductScreenComponent.
  */
 const CatalogProductScreenComponent: React.FC<CatalogProductScreenComponentProps> =
-({ onSelectedProduct, products, fetchNextPage, hasNextPage, isLoading }) => {
-  return (
-    <View style={styles.container}>
-      {isLoading ? <ActivityIndicator/> :
+  ({ onSelectedProduct, products, fetchNextPage,
+    hasNextPage, isLoading, onRefresh, isRefresh }) => {
+    return (
+
+      <View style={styles.container}>
         <FlatList {..._getFlatListProductsProps({
           products, hasNextPage, fetchNextPage, onSelectedProduct,
+          isLoading, isRefresh, onRefresh,
         })}/>
-      }
-    </View>
-  );
-};
+      </View>
+    );
+  };
 
 export default CatalogProductScreenComponent;

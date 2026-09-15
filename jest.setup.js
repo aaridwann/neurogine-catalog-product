@@ -88,7 +88,38 @@ jest
 .mock('react-native-safe-area-context', () => ({
   ...jest.requireActual('react-native-safe-area-context'),
   useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }),
-}));
+}))
+.mock('react-native-linear-gradient', () => 'LinearGradient')
+.mock('react-native/Libraries/Lists/FlatList', () => {
+  const React = jest.requireActual('react');
+
+  return {
+    __esModule: true,
+    default: ({
+      data, renderItem, testID, style,
+      contentContainerStyle, horizontal, showsHorizontalScrollIndicator,
+    }: any) => {
+      const renderedItems = (data || []).map((item: any, index: number) => {
+        const element = renderItem({ item, index, separators: {} });
+
+        return React.cloneElement(element, { key: index });
+      });
+
+      const simpleProps = {
+        testID: testID || 'mock-flat-list',
+        style,
+        contentContainerStyle,
+        horizontal,
+        showsHorizontalScrollIndicator,
+        data,
+        renderItem,
+      };
+
+      return React.createElement('FlatList', simpleProps, renderedItems);
+    },
+  };
+});
+
 
 import { Animated } from 'react-native';
 

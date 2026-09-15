@@ -2,6 +2,7 @@
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
     "target": "esnext",
+    "types": ["node", "jest"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "outDir": "./dist",
@@ -17,7 +18,12 @@
     "noEmitOnError": false
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx",
+    "src/Utils/Test/**/*"
   ],
   "exclude": [
     "node_modules",

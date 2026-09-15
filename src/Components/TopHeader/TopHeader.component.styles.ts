@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: '#F3F2F2',
     zIndex: 2,
+    shadowOffset: { width: 2, height: 10 },
+    shadowRadius: 10,
+    shadowOpacity: 0.2,
+    paddingBottom: 20,
   },
   searchContainer: {
     alignItems: 'center',

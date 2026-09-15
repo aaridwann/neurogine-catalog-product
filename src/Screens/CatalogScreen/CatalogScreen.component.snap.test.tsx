@@ -1,5 +1,6 @@
-import CatalogProductScreenComponent from './CatalogScreen.component';
 import { runSnapshotTests } from '../../Utils/Test/Test.utils';
+
+import CatalogProductScreenComponent from './CatalogScreen.component';
 
 describe('Catalog Product Screen Component snap test', () => {
   const mockProductItem = {

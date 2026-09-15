@@ -6,6 +6,13 @@ exports[`Top Header Component Snap test should render correctly when search is l
     [
       {
         "backgroundColor": "#F3F2F2",
+        "paddingBottom": 20,
+        "shadowOffset": {
+          "height": 10,
+          "width": 2,
+        },
+        "shadowOpacity": 0.2,
+        "shadowRadius": 10,
         "zIndex": 2,
       },
       {
@@ -222,6 +229,13 @@ exports[`Top Header Component Snap test should render correctly when search sect
     [
       {
         "backgroundColor": "#F3F2F2",
+        "paddingBottom": 20,
+        "shadowOffset": {
+          "height": 10,
+          "width": 2,
+        },
+        "shadowOpacity": 0.2,
+        "shadowRadius": 10,
         "zIndex": 2,
       },
       {
@@ -438,6 +452,13 @@ exports[`Top Header Component Snap test should render correctly when search sect
     [
       {
         "backgroundColor": "#F3F2F2",
+        "paddingBottom": 20,
+        "shadowOffset": {
+          "height": 10,
+          "width": 2,
+        },
+        "shadowOpacity": 0.2,
+        "shadowRadius": 10,
         "zIndex": 2,
       },
       {
@@ -654,6 +675,13 @@ exports[`Top Header Component Snap test should render correctly when searching w
     [
       {
         "backgroundColor": "#F3F2F2",
+        "paddingBottom": 20,
+        "shadowOffset": {
+          "height": 10,
+          "width": 2,
+        },
+        "shadowOpacity": 0.2,
+        "shadowRadius": 10,
         "zIndex": 2,
       },
       {
