@@ -5,20 +5,20 @@ import { useInfiniteQuery } from '@Neurogine/core-network';
 import useCatalogProductInfinite, { catalogKeys } from './UseCatalog.hooks';
 
 jest
-.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
-}))
-.mock('@Neurogine/core-network', () => ({
-  useInfiniteQuery: jest.fn(),
-}))
-.mock('@Neurogine/root', () => ({
-  snackbarActions: {
-    showSnackbar: jest.fn()
-  }
-}))
-.mock('../../Service/CatalogService', () => ({
-  fetchCatalogProducts: jest.fn(),
-}))
+  .mock('react-redux', () => ({
+    useDispatch: jest.fn(),
+  }))
+  .mock('@Neurogine/core-network', () => ({
+    useInfiniteQuery: jest.fn(),
+  }))
+  .mock('@Neurogine/root', () => ({
+    snackbarActions: {
+      showSnackbar: jest.fn(),
+    },
+  }))
+  .mock('../../Service/CatalogService', () => ({
+    fetchCatalogProducts: jest.fn(),
+  }));
 
 describe('useCatalogProductInfinite Hook', () => {
   const mockNavigation = {

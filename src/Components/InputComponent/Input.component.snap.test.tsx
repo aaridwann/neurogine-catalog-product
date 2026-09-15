@@ -37,7 +37,7 @@ describe('Input Component Snap test', () => {
     jest.runOnlyPendingTimers();
     jest.useRealTimers();
   });
-  
+
   const mockSuggestionItem = {
     id: 1,
     title: 'Wireless Mouse',

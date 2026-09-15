@@ -1,7 +1,7 @@
-import MainCard from "./MainCard.component";
+import MainCard from './MainCard.component';
+import { runSnapshotTests } from '../../Utils/Test/Test.utils';
 
-import {runSnapshotTests} from '../../Utils/Test/Test.utils';
-import { MainCardProps } from "./MainCard.component.types";
+import type { MainCardProps } from './MainCard.component.types';
 
 jest.mock('react-native-linear-gradient', () => 'LinearGradient');
 
