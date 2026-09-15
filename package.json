@@ -5,9 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "postinstall": "npm run build",
-    "prepare": "npm run build",
-    "build": "rm -rf dist && tsc --noEmitOnError false || exit 0",
+    "build": "rm -rf dist && tsc",
     "watch": "tsc --watch",
     "prepublishOnly": "yarn build",
     "typescript": "tsc --noEmit",
